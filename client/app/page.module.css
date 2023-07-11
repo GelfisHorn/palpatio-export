@@ -1,0 +1,13 @@
+.container {
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 50%,
+            rgba(255, 255, 255, 1)), url("/QuoteOrder/background.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+@media (max-width: 640px) {
+    .container {
+        background-position: left;
+    }
+}

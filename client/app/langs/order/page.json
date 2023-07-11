@@ -1,0 +1,27 @@
+{
+    "es": {
+        "items": {
+            "package": "Paquete",
+            "pallet": "Pallet",
+            "tank": "Tanque",
+            "other": "Otro"
+        },
+        "notifications": {
+            "order": {
+                "error": {
+                    "country": "Debes seleccionar un país",
+                    "items": {
+                        "default": "Debes elegir qué vas a enviar",
+                        "input": {
+                            "content": {
+                                "length": "El contenido debe tener más de 10 caracteres",
+                                "void": "El contenido no puede estar vacío"
+                            }
+                        }
+                    },
+                    "fields": "Debes llenar todos los campos"
+                }
+            }
+        }
+    }
+}

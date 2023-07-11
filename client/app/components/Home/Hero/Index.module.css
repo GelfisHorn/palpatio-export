@@ -1,0 +1,59 @@
+.section {
+    height: calc(100vh - 5rem);
+    padding-bottom: 5rem;
+    min-height: 650px;
+}
+
+.imageContainer {
+    justify-content: center;
+    width: 100%;
+    position: relative !important;
+}
+
+.imageContainer .image {
+    object-fit: contain;
+    width: 70% !important;
+    position: relative !important;
+    height: unset !important;
+}
+
+.background {
+    position: relative;
+    height: calc(100vh - 5rem);
+}
+
+.background::before {
+    content: "";
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0) 50%,
+            rgba(255, 255, 255, 1)), url('/hero/background.webp');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+    background-origin: content-box;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 70%;
+    z-index: -1;
+}
+
+@media (max-width: 1024px) {
+    .background::before {
+        background-position: center;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-image: url('/hero/background.webp');
+        opacity: .3;
+    }
+    .section {
+        min-height: 750px;
+    }
+}
+
+@media (max-width: 640px) {
+    .imageContainer .image {
+        width: 90% !important;
+    }
+}

@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    overflow: hidden;
+}
+
+.height {
+    height: calc(100vh - 4rem);
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background: rgb(245, 245, 245);
+    overflow-y: scroll;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 4rem);
+}
+
+.sidebarHeight {
+    height: calc(100vh - 9rem);
+}
+
+.label {
+    color: rgb(115, 115, 115);
+}
+
+.option {
+    font-weight: 600;
+    color: rgb(38, 38, 38);
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .height {
+        height: auto;
+    }
+
+    .sidebar {
+        height: auto;
+    }
+
+    .sidebarHeight {
+        height: auto;
+    }
+}

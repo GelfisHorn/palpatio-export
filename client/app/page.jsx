@@ -10,6 +10,7 @@ import AboutUs from "./components/Home/AboutUs/Index"
 import FAQ from "./components/Home/FAQ/Index"
 // Styles
 import styles from './page.module.css'
+import Contact from "./components/Home/Contact/Index"
 
 export const metadata = {
 	title: 'Inicio | Pal Patio Export',
@@ -30,7 +31,10 @@ export default function Home() {
 				<Process />
 			</div>
 			<AboutUs />
-			<FAQ />
+			<div className={"divide-y"}>
+				<FAQ />
+				<Contact />
+			</div>
 		</Layout>
 	)
 }

@@ -17,7 +17,7 @@ export default function FAQ() {
                     <div className={"uppercase font-bold sm:text-lg text-primary"}>Preguntas frequentes</div>
                     <h2 className={"text-2xl sm:text-4xl font-bold"}>Encuentra respuestas a tus dudas</h2>
                 </div>
-                <div className={"grid grid-cols-1 gap-1"}>
+                <div className={"grid grid-cols-1 divide-y"}>
                     <Item
                         title={"¿Cuáles son los servicios de envío disponibles?"}
                         description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}
@@ -67,7 +67,7 @@ function Item({ title, description }) {
     return (
         <div 
             onClick={handleShow} 
-            className={"flex items-center justify-between shadow-md rounded-md p-4 cursor-pointer select-none"}
+            className={"flex items-center justify-between p-4 cursor-pointer select-none"}
         >
             <div className={"flex flex-col gap-2"}>
                 <div className={`text-sm sm:text-lg uppercase font-semibold ${show ? "text-primary" : "text-black"} transition-colors`}>{title}</div>

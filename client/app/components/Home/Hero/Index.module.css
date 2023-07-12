@@ -41,11 +41,12 @@
 @media (max-width: 1024px) {
     .background::before {
         background-position: center;
+        background-size: cover;
         left: 0;
         right: 0;
         width: 100%;
-        background-image: url('/hero/background.webp');
-        opacity: .3;
+        background-image: url('/hero/background-mobile.webp');
+        opacity: .2;
     }
     .section {
         min-height: 750px;

@@ -16,28 +16,28 @@ export default function Process() {
                         icon={"fa-solid fa-box"}
                         number={1}
                         title={"Solicitud del pedido"}
-                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}
+                        description={"Durante esta etapa, recibimos la solicitud de compra del cliente, donde recopilamos todos los detalles necesarios, como productos, cantidades y dirección de envío. Nuestro objetivo es garantizar una comunicación clara y precisa con el cliente para entender sus necesidades y asegurar una experiencia de compra satisfactoria."}
                     />
                     <Card
                         side={"right"}
                         icon={"fa-solid fa-truck-fast"}
                         number={2}
                         title={"Recoger el pedido"}
-                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}
+                        description={"Una vez que hemos recibido la solicitud del pedido, procedemos a reunir todos los productos requeridos en nuestro almacén. Nuestro equipo de logística se encarga de localizar y seleccionar los artículos con cuidado, verificando su calidad y asegurando que se encuentren en óptimas condiciones para el envío."}
                     />
                     <Card
                         side={"left"}
                         icon={"fa-solid fa-ship"}
                         number={3}
                         title={"Envío"}
-                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}
+                        description={"En esta etapa, preparamos el paquete de envío de manera segura y eficiente. Empaquetamos los productos de forma adecuada, utilizando materiales resistentes y protegiendo los artículos frágiles. Además, generamos la documentación necesaria, como etiquetas de envío y facturas, para garantizar un proceso de envío sin contratiempos."}
                     />
                     <Card
                         side={"right"}
                         icon={"fa-solid fa-hand-holding-box"}
                         number={4}
                         title={"Entrega"}
-                        description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}
+                        description={"Una vez que el paquete ha sido preparado para su envío, lo entregamos al servicio de mensajería o empresa de transporte seleccionada. Nos aseguramos de colaborar con proveedores confiables y eficientes que garanticen la entrega puntual y segura de los productos al destino indicado por el cliente. Mantenemos una comunicación constante con el cliente para proporcionar información actualizada sobre el estado de entrega y resolver cualquier duda o incidencia que pueda surgir."}
                     />
                 </div>
             </div>

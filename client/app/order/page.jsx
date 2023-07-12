@@ -26,12 +26,42 @@ export default function OrderShipping() {
                             <div>Motores</div>
                             <div>Bicicletas</div>
                         </Category>
-                        <Category category={"furniture"} classes={`${styles.furnitureCard} aspect-video`} title={"Muebles"}></Category>
-                        <Category category={"box"} classes={`${styles.boxCard} aspect-video`} title={"Cajas"}></Category>
-                        <Category category={"tank"} classes={`${styles.tankCard} aspect-video`} title={"Tanques"}></Category>
-                        <Category category={"pallet"} classes={`${styles.palletCard} aspect-video`} title={"Pallet"}></Category>
-                        <Category category={"moving"} classes={`${styles.movingCard} aspect-video border-[.35rem] border-primary`} title={"Mudanzas"} subtitle={"20% de descuento"}></Category>
-                        <Category category={"other"} classes={`${styles.otherCard} lg:col-start-1 lg:col-end-3 aspect-video lg:aspect-[3/1]`} title={"Otros"}></Category>
+                        <Category category={"furniture"} classes={`${styles.furnitureCard} aspect-video`} title={"Muebles"}>
+                            <div>Mesas</div>
+                            <div>Sillones</div>
+                            <div>Estanterías</div>
+                            <div>Sillas</div>
+                        </Category>
+                        <Category category={"box"} classes={`${styles.boxCard} aspect-video`} title={"Cajas"}>
+                            <div>Ropa</div>
+                            <div>Regalos</div>
+                            <div>Juguetes</div>
+                            <div>Herramientas</div>
+                        </Category>
+                        <Category category={"tank"} classes={`${styles.tankCard} aspect-video`} title={"Tanques"}>
+                            <div>Almacenamiento</div>
+                            <div>Combustible</div>
+                            <div>Agua</div>
+                            <div>Gas</div>
+                        </Category>
+                        <Category category={"pallet"} classes={`${styles.palletCard} aspect-video`} title={"Pallet"}>
+                            <div>Madera</div>
+                            <div>Plástico</div>
+                            <div>Metal</div>
+                            <div>Cartón</div>
+                        </Category>
+                        <Category category={"moving"} classes={`${styles.movingCard} aspect-video border-[.35rem] border-orange-400`} title={"Mudanzas"} subtitle={"20% de descuento"}>
+                            <div>Electrodomésticos</div>
+                            <div>Muebles</div>
+                            <div>Decoración</div>
+                            <div>Ropa</div>
+                        </Category>
+                        <Category category={"other"} classes={`${styles.otherCard} lg:col-start-1 lg:col-end-3 aspect-video lg:aspect-[3/1]`} title={"Otros"}>
+                            <div>Herramientas</div>
+                            <div>Elementos de jardinería</div>
+                            <div>Artículos de viaje</div>
+                            <div>Accesorios electrónicos</div>
+                        </Category>
                     </div>
                 </div>
             </div>
@@ -131,7 +161,7 @@ function Category({ children, category, classes, title, subtitle }) {
             <div className={"flex flex-col items-center justify-center text-center gap-1 sm:gap-3 lg:gap-0 2xl:gap-3 absolute z-10 top-4 bottom-4 text-white w-full"}>
                 <div className={"flex flex-col"}>
                     <div className={"font-semibold text-2xl sm:text-3xl lg:text-2xl 2xl:text-3xl"}>{title}</div>
-                    {subtitle && (<div className={"text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-lg italic bg-primary text-white px-2 rounded-full"}>{subtitle}</div>)}
+                    {subtitle && (<div className={"text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-lg italic bg-orange-400 text-white px-2 rounded-full"}>{subtitle}</div>)}
                 </div>
                 <div className={"grid grid-cols-2 gap-x-5 text-lg"}>
                     {children || (

@@ -31,9 +31,9 @@ export default function OrderNavbar({ step }) {
                     <span>Detalles de envío</span>
                 </div>
             </div>
-            {/* <div>
-                <button className={"text-base 2xl:text-lg"}>Iniciar sesión</button>
-            </div> */}
+            <div>
+                <Link href={"/login"} className={"text-base 2xl:text-lg"}>Iniciar sesión</Link>
+            </div>
         </div>
     )
 }

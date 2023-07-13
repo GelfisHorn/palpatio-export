@@ -3,7 +3,7 @@ import Head from 'next/head'
 // Context
 import { AppContextProvider } from './context/AppContext'
 // Styles
-import './globals.css'
+import '../styles/globals.css'
 
 export const metadata = {
 	title: 'Pal Patio Export',

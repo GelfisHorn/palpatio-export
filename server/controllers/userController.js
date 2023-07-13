@@ -1,6 +1,8 @@
 import User from "../models/User.js"
 import createToken from "../helpers/createToken.js"
 import createJWT from '../helpers/createJWT.js'
+import sendRegisterMail from "../hooks/confirm/sendMail.js"
+import sendResetPassMail from "../hooks/resetPassword/sendMail.js"
 
 const register = async (req, res) => {
     const { email, name, surname, password } = req.body
@@ -9,20 +11,22 @@ const register = async (req, res) => {
 
     if (emailExist) {
         const error = new Error('Email already exists')
-        return res.status(400).json({ msg: error.message, success: false })
+        return res.status(400).json({ msg: error.message, success: false });
     }
 
     try {
         if (!email || !name || !surname || !password) {
-            res.json({ msg: 'Some fields are missing', success: false })
-            return
+            return res.status(400).json({ msg: 'Some fields are missing', success: false });
         }
-        const user = new User(req.body)
-        user.token = createToken()
-        await user.save()
-        res.status(200).json({ success: true })
-    } catch (error) {
-        console.log(error)
+        const user = new User(req.body);
+        const token = createToken();
+        user.token = token;
+        await user.save();
+        sendRegisterMail({ email, token })
+        res.status(200).json({ success: true });
+    } catch (err) {
+        const error = new Error('There was an error creating account')
+        return res.status(403).json({ msg: error.message, success: false })
     }
 }
 
@@ -51,7 +55,7 @@ const authenticate = async (req, res) => {
     }
 
     if (await user.checkPassword(password)) {
-        res.json({
+        return res.json({
             _id: user._id,
             name: user.name,
             email: user.email,
@@ -77,9 +81,9 @@ const confirm = async (req, res) => {
         user.confirmed = true
         user.token = ''
         await user.save()
-        res.json({ success: true })
+        return res.status(200).json({ success: true })
     } catch (error) {
-        console.log(error)
+        return res.status(404).json({ success: false })
     }
 }
 
@@ -93,12 +97,13 @@ const resetPassword = async (req, res) => {
     }
 
     try {
-        user.token = createToken()
+        const token = createToken();
+        user.token = token;
         await user.save()
-        /* TODO: Importar nodemailer al proyecto y enviar email cuando el usuario resetee su password */
-        res.json({ success: true })
+        sendResetPassMail({ email, token });
+        return res.json({ success: true })
     } catch (error) {
-        console.log(error)
+        return res.json({ success: false })
     }
 }
 
@@ -110,7 +115,7 @@ const checkToken = async (req, res) => {
         const error = new Error('Invalid token')
         return res.status(404).json({ msg: error.message, success: false })
     }
-    res.json({ success: true })
+    return res.json({ success: true })
 }
 
 const newPassword = async (req, res) => {
@@ -127,16 +132,16 @@ const newPassword = async (req, res) => {
     user.token = ''
     try {
         await user.save()
-        res.json({ success: true })
+        return res.json({ success: true })
     } catch (error) {
-        console.log(error)
+        return res.json({ success: false })
     }
 }
 
 const profile = async (req, res) => {
     const { user } = req
 
-    res.json(user)
+    return res.json(user)
 }
 
 const editProfile = async (req, res) => {
@@ -154,9 +159,9 @@ const editProfile = async (req, res) => {
                 user.email = email
                 user.password = password
                 await user.save()
-                res.json(user)
+                return res.json(user)
             } catch (error) {
-                res.json({ success: false })
+                return res.json({ success: false })
             }
 
         }
@@ -172,10 +177,10 @@ const disable = async (req, res) => {
             user.disabled = true
             try {
                 await user.save()
-                res.json({ success: true })
+                return res.json({ success: true })
             } catch (error) {
                 console.log(error)
-                res.json({ success: false })
+                return res.json({ success: false })
             }
         }
     }

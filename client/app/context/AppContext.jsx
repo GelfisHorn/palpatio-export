@@ -1,9 +1,38 @@
 "use client"
 
-import { createContext,  useState } from "react";
+import axios from "axios";
+import { createContext,  useEffect,  useState } from "react";
 const AppContext = createContext();
 
 export function AppContextProvider({ children }) {
+
+    const [ auth, setAuth ] = useState({});
+
+    useEffect(() => {
+        getProfile();
+    }, [])
+
+    async function getProfile() {
+        const token = localStorage.getItem('auth-token');
+        if (!token) {
+            return;
+        }
+
+        const config = {
+            headers: {
+                "Content-Type": "application-json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+            const { data } = await axios.post('/api/users/getProfile', { config });
+            setAuth(data);
+        } catch (error) {
+            setAuth({});
+            localStorage.setItem('auth-token', null);
+        }
+    }
 
     // Order form state
     const [ order, setOrder ] = useState({
@@ -49,6 +78,8 @@ export function AppContextProvider({ children }) {
 
     return (
         <AppContext.Provider value={{
+            auth,
+            setAuth,
             order, 
             setOrder,
             step,

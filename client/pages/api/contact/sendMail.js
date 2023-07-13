@@ -3,6 +3,10 @@ import nodemailer from 'nodemailer';
 import contact from '@/app/hooks/emailTemplates/contact';
 
 export default async function handler(req, res) {
+    if (req.method != 'POST') {
+        res.status(405).json({ msg: `${req.method} method not allowed` });
+    }
+
     const { name, email, message } = req.body || {};
 
     try {
@@ -18,7 +22,7 @@ export default async function handler(req, res) {
 
         await transporter.sendMail({
             from: `"${name}" <${email}>`,
-            to: "helphis.tech@gmail.com",
+            to: "palpatioexport@gmail.com",
             subject: `Nuevo contacto de Pal Patio Export`,
             text: `${name} dejó un mensaje: \n\n${message}`,
             html: contact({ name, email, message })

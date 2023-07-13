@@ -1,0 +1,65 @@
+.container {
+    height: calc(100vh - 10rem);
+    min-height: 43rem;
+}
+
+.image-container {
+    width: 100%;
+    position: relative !important;
+    height: calc(100vh - 10rem);
+    padding: 3rem 0;
+}
+
+.image-container .image {
+    object-fit: contain;
+    width: fit-content !important;
+    margin: 0 auto;
+    position: relative !important;
+}
+
+.input {
+    border: 2px solid rgb(220, 220, 220);
+    background: rgba(255, 255, 255, 1);
+    outline: none;
+    padding: .5rem .65rem;
+    border-radius: .2rem;
+    transition: border .2s;
+}
+
+.input::placeholder {
+    color: rgb(190, 190, 190);
+}
+
+.input:focus {
+    border-color: rgb(14, 116, 144);
+}
+
+@media (max-width: 1024px) {
+    .container {
+        position: relative;
+    }
+
+    .container::before {
+        content: "";
+        background-image: url("/register/register.webp");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        background-origin: content-box;
+        position: absolute;
+        top: 0px;
+        left: 0;
+        right: 0px;
+        bottom: 0px;
+        width: 100%;
+        z-index: -1;
+        opacity: .3;
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .container::before {
+        background-image: none
+    }
+}

@@ -14,9 +14,14 @@ import '../../styles/globals.css'
 export default function ResetPassword() {
 
     const [ email, setEmail ] = useState("");
+    const [ formSent, setFormSent ] = useState(false);
 
     async function handleResetPassword(e) {
         e.preventDefault();
+
+        if(formSent) {
+            return;
+        }
 
         if(!email) {
             toast.error("Debes escribir tu correo electrónico");
@@ -24,11 +29,17 @@ export default function ResetPassword() {
         }
 
         try {
+            setFormSent(true);
             await axios.post('/api/users/resetPassword', { email });
+            resetForm();
             toast.success("Se han enviado instrucciones a tu email!");
         } catch (error) {
             toast.error("Hubo un error al recuperar tu contraseña");
         }
+    }
+
+    function resetForm() {
+        setEmail("");
     }
 
     return (

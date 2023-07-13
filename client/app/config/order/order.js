@@ -36,7 +36,8 @@ const COUNTRIES = { // Country select
     "AT": "Austria",
     "BE": "Belgica",
     "NL": "Holanda",
-    "LU": "Luxemburgo"
+    "LU": "Luxemburgo",
+    "DE": "Alemania"
 }
 const DISCOUNT = 20; // Discount on "moving" category
 // Price Settings

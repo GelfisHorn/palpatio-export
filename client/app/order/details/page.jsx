@@ -100,94 +100,99 @@ export default function OrderIndex() {
         order.category && (
             <OrderLayout step={2}>
                 <div className={"flex flex-col gap-8 w-full px-3 sm:px-8"}>
-                    <div className={"flex flex-col gap-4"}>
-                        <h2 className={"text-2xl font-bold uppercase"}>Datos iniciales</h2>
-                        <div className={"flex flex-col gap-8"}>
-                            <div>
-                                <div className={"text-lg font-semibold"}>Haz el proceso más fácil</div>
-                                <p className={"text-neutral-600"}><Link className={"text-primary underline"} href={"#"}>Inicia sesión</Link> para facilitar el proceso la próxima vez que envíes algo.</p>
-                            </div>
-                            <div className={"grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-10 p-5 bg-white rounded-md shadow-md"}>
+                    <div className={"flex flex-col gap-7"}>
+                        <div className={"flex flex-col gap-4"}>
+                            <h2 className={"text-2xl font-bold uppercase"}>Datos iniciales</h2>
+                            <div className={"flex flex-col gap-8"}>
                                 <div>
-                                    <div className={"text-neutral-600"}>Desde</div>
-                                    <div className={"relative"}>
-                                        <div onClick={() => setShowSelect(!showSelect)} className={`flex items-center justify-between cursor-pointer border-b-2 ${showSelect ? "border-primary" : "border-transparent"} ${order.from ? "text-neutral-800" : "text-neutral-500"} transition-colors select-none`}>
-                                            <div className={`font-semibold`}>{order.from ? COUNTRIES[order.from] : "Seleccionar país"}</div>
-                                            <i className="fa-solid fa-angle-down"></i>
-                                        </div>
-                                        {showSelect && (
-                                            <div className={"absolute top-7 bg-white rounded-b-md shadow-md border overflow-hidden w-full border-t-transparent z-10"}>
-                                                {Object.keys(COUNTRIES).map(country => (
-                                                    <div key={country}
-                                                        onClick={() => {
-                                                            setOrder(current => {
-                                                                return { ...current, from: country }
-                                                            })
-                                                            setShowSelect(false);
-                                                        }}
-                                                        className={"p-4 w-full hover:bg-neutral-100 transition-colors cursor-pointer text-sm"}>
-                                                        {COUNTRIES[country]}</div>
-                                                ))}
+                                    <div className={"text-lg font-semibold"}>Haz el proceso más fácil</div>
+                                    <p className={"text-neutral-600"}><Link className={"text-primary underline"} href={"#"}>Inicia sesión</Link> para facilitar el proceso la próxima vez que envíes algo.</p>
+                                </div>
+                                <div className={"grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-10 p-5 bg-white rounded-md shadow-md"}>
+                                    <div>
+                                        <div className={"text-neutral-600"}>Desde</div>
+                                        <div className={"relative"}>
+                                            <div onClick={() => setShowSelect(!showSelect)} className={`flex items-center justify-between cursor-pointer border-b-2 ${showSelect ? "border-primary" : "border-transparent"} ${order.from ? "text-neutral-800" : "text-neutral-500"} transition-colors select-none`}>
+                                                <div className={`font-semibold`}>{order.from ? COUNTRIES[order.from] : "Seleccionar país"}</div>
+                                                <i className="fa-solid fa-angle-down"></i>
                                             </div>
-                                        )}
+                                            {showSelect && (
+                                                <div className={"absolute top-7 bg-white rounded-b-md shadow-md border overflow-hidden w-full border-t-transparent z-10"}>
+                                                    {Object.keys(COUNTRIES).map(country => (
+                                                        <div key={country}
+                                                            onClick={() => {
+                                                                setOrder(current => {
+                                                                    return { ...current, from: country }
+                                                                })
+                                                                setShowSelect(false);
+                                                            }}
+                                                            className={"p-4 w-full hover:bg-neutral-100 transition-colors cursor-pointer text-sm"}>
+                                                            {COUNTRIES[country]}</div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
-                                <div>
-                                    <div className={"text-neutral-600"}>Hacia</div>
-                                    <div className={"relative"}>
-                                        <div className={"flex items-center justify-between text-neutral-800"}>
-                                            <div className={"font-semibold"}>República Dominicana</div>
+                                    <div>
+                                        <div className={"text-neutral-600"}>Hacia</div>
+                                        <div className={"relative"}>
+                                            <div className={"flex items-center justify-between text-neutral-800"}>
+                                                <div className={"font-semibold"}>República Dominicana</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div className={"flex flex-col gap-y-3"}>
+                                {order.items.map((item) => (
+                                    item.type != 'vehicle' ? (
+                                        <Item key={item.id} item={item} items={{ state: items, setState: setItems }} checkFields={checkFields} />
+                                    ) : (
+                                        <ItemVehicle key={item.id} item={item} items={{ state: items, setState: setItems }} checkFields={checkFields} />
+                                    )
+                                ))}
+                            </div>
                         </div>
-                        <div className={"flex flex-col gap-y-3"}>
-                            {order.items.map((item) => (
-                                item.type != 'vehicle' ? (
-                                    <Item key={item.id} item={item} items={{ state: items, setState: setItems }} checkFields={checkFields} />
-                                ) : (
-                                    <ItemVehicle key={item.id} item={item} items={{ state: items, setState: setItems }} checkFields={checkFields} />
-                                )
-                            ))}
-                        </div>
-                        <div className={"grid grid-cols-2 gap-2"}>
-                            <AddItem
-                                type={"vehicle"}
-                                icon={"fa-solid fa-car"}
-                                text={"Añadir vehiculo"}
-                                items={{ state: items, setState: setItems }}
-                            />
-                            <AddItem
-                                type={"furniture"}
-                                icon={"fa-solid fa-loveseat"}
-                                text={"Añadir mueble"}
-                                items={{ state: items, setState: setItems }}
-                            />
-                            <AddItem
-                                type={"package"}
-                                icon={"fa-solid fa-box"}
-                                text={"Añadir paquete"}
-                                items={{ state: items, setState: setItems }}
-                            />
-                            <AddItem
-                                type={"pallet"}
-                                icon={"fa-solid fa-pallet-box"}
-                                text={"Añadir pallet"}
-                                items={{ state: items, setState: setItems }}
-                            />
-                            <AddItem
-                                type={"tank"}
-                                icon={"fa-solid fa-tank-water"}
-                                text={"Añadir tanque"}
-                                items={{ state: items, setState: setItems }}
-                            />
-                            <AddItem
-                                type={"other"}
-                                icon={"fa-sharp fa-regular fa-square-dashed"}
-                                text={"Añadir otro"}
-                                items={{ state: items, setState: setItems }}
-                            />
+                        <div className={"flex flex-col gap-4"}>
+                            <div className={"text-2xl font-bold uppercase text-center"}>¿Quieres enviar algo más?</div>
+                            <div className={"grid grid-cols-2 gap-2"}>
+                                <AddItem
+                                    type={"vehicle"}
+                                    icon={"fa-solid fa-car"}
+                                    text={"Añadir vehiculo"}
+                                    items={{ state: items, setState: setItems }}
+                                />
+                                <AddItem
+                                    type={"furniture"}
+                                    icon={"fa-solid fa-loveseat"}
+                                    text={"Añadir mueble"}
+                                    items={{ state: items, setState: setItems }}
+                                />
+                                <AddItem
+                                    type={"package"}
+                                    icon={"fa-solid fa-box"}
+                                    text={"Añadir paquete"}
+                                    items={{ state: items, setState: setItems }}
+                                />
+                                <AddItem
+                                    type={"pallet"}
+                                    icon={"fa-solid fa-pallet-box"}
+                                    text={"Añadir pallet"}
+                                    items={{ state: items, setState: setItems }}
+                                />
+                                <AddItem
+                                    type={"tank"}
+                                    icon={"fa-solid fa-tank-water"}
+                                    text={"Añadir tanque"}
+                                    items={{ state: items, setState: setItems }}
+                                />
+                                <AddItem
+                                    type={"other"}
+                                    icon={"fa-sharp fa-regular fa-square-dashed"}
+                                    text={"Añadir otro"}
+                                    items={{ state: items, setState: setItems }}
+                                />
+                            </div>
                         </div>
                     </div>
                     <button onClick={handleVerifyNextStep} className={"flex items-center gap-1 justify-center px-10 py-3 rounded-md bg-primary hover:bg-cyan-800 text-white"}>
@@ -345,42 +350,48 @@ function Item({ item, items, checkFields }) {
                 </button>
             </div>
             <div className={"flex flex-col gap-3 py-2 sm:py-5 px-2 sm:px-6 bg-white rounded-b-md"}>
-                <div className={"grid grid-cols-4 grid-rows-2 gap-2"}>
-                    <div>
-                        <label className={"font-semibold text-sm"} htmlFor={`weight${item.id}`}>Peso</label>
-                        <div className={"relative"}>
-                            <input value={weight} onChange={e => setWeight(e.target.value > UNITS_MAX.weight ? UNITS_MAX.weight : e.target.value)} className={`${styles.input}`} type="number" id={`weight${item.id}`} max={1000} min={1} />
-                            <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>kg</span>
+                <div className={'flex flex-col gap-2'}>
+                    <div className={"flex flex-col"}>
+                        <div className={"font-semibold text-lg"}>¿Conoces las dimensiones?</div>
+                        <p className={"text-neutral-600 text-sm"}>Si no conoces las dimensiones, simplemente haz click en siguiente.</p>
+                    </div>
+                    <div className={"grid grid-cols-4 grid-rows-2 gap-2"}>
+                        <div>
+                            <label className={"font-semibold text-sm"} htmlFor={`weight${item.id}`}>Peso</label>
+                            <div className={"relative"}>
+                                <input value={weight} onChange={e => setWeight(e.target.value > UNITS_MAX.weight ? UNITS_MAX.weight : e.target.value)} className={`${styles.input}`} type="number" id={`weight${item.id}`} max={1000} min={1} />
+                                <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>kg</span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <label className={"font-semibold text-sm"} htmlFor={`length${item.id}`}>Largo</label>
-                        <div className={"relative"}>
-                            <input value={length} onChange={e => setLength(e.target.value > UNITS_MAX.length ? UNITS_MAX.length : e.target.value)} className={`${styles.input}`} type="number" id={`length${item.id}`} max={1000} min={1} />
-                            <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>cm</span>
+                        <div>
+                            <label className={"font-semibold text-sm"} htmlFor={`length${item.id}`}>Largo</label>
+                            <div className={"relative"}>
+                                <input value={length} onChange={e => setLength(e.target.value > UNITS_MAX.length ? UNITS_MAX.length : e.target.value)} className={`${styles.input}`} type="number" id={`length${item.id}`} max={1000} min={1} />
+                                <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>cm</span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <label className={"font-semibold text-sm"} htmlFor={`width${item.id}`}>Ancho</label>
-                        <div className={"relative"}>
-                            <input value={width} onChange={e => setWidth(e.target.value > UNITS_MAX.width ? UNITS_MAX.width : e.target.value)} className={`${styles.input}`} type="number" id={`width${item.id}`} max={1000} min={1} />
-                            <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>cm</span>
+                        <div>
+                            <label className={"font-semibold text-sm"} htmlFor={`width${item.id}`}>Ancho</label>
+                            <div className={"relative"}>
+                                <input value={width} onChange={e => setWidth(e.target.value > UNITS_MAX.width ? UNITS_MAX.width : e.target.value)} className={`${styles.input}`} type="number" id={`width${item.id}`} max={1000} min={1} />
+                                <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>cm</span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <label className={"font-semibold text-sm"} htmlFor={`height${item.id}`}>Alto</label>
-                        <div className={"relative"}>
-                            <input value={height} onChange={e => setHeight(e.target.value > UNITS_MAX.height ? UNITS_MAX.height : e.target.value)} className={`${styles.input}`} type="number" id={`height${item.id}`} max={1000} min={1} />
-                            <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>cm</span>
+                        <div>
+                            <label className={"font-semibold text-sm"} htmlFor={`height${item.id}`}>Alto</label>
+                            <div className={"relative"}>
+                                <input value={height} onChange={e => setHeight(e.target.value > UNITS_MAX.height ? UNITS_MAX.height : e.target.value)} className={`${styles.input}`} type="number" id={`height${item.id}`} max={1000} min={1} />
+                                <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>cm</span>
+                            </div>
                         </div>
-                    </div>
-                    <div className={"col-start-1 col-end-4"}>
-                        <label className={"font-semibold text-sm"} htmlFor={`content${item.id}`}>Contenido</label>
-                        <input value={content} onChange={e => setContent(e.target.value)} className={`${styles.input} ${checkFields ? handleCheckTextInput(content) ? styles.inputError : styles.inputCheck : ""}`} type="text" id={`content${item.id}`} />
-                    </div>
-                    <div className={"col-start-4 col-end-5"}>
-                        <label className={"font-semibold text-sm"} htmlFor={`value${item.id}`}>Valor (€)</label>
-                        <input value={value} onChange={e => setValue(e.target.value)} className={`${styles.input} ${checkFields ? handleCheckNumberInput(value) ? styles.inputError : styles.inputCheck : ""}`} type="number" id={`value${item.id}`} min={1} />
+                        <div className={"col-start-1 col-end-4"}>
+                            <label className={"font-semibold text-sm"} htmlFor={`content${item.id}`}>Contenido</label>
+                            <input value={content} onChange={e => setContent(e.target.value)} className={`${styles.input} ${checkFields ? handleCheckTextInput(content) ? styles.inputError : styles.inputCheck : ""}`} type="text" id={`content${item.id}`} />
+                        </div>
+                        <div className={"col-start-4 col-end-5"}>
+                            <label className={"font-semibold text-sm"} htmlFor={`value${item.id}`}>Valor (€)</label>
+                            <input value={value} onChange={e => setValue(e.target.value)} className={`${styles.input} ${checkFields ? handleCheckNumberInput(value) ? styles.inputError : styles.inputCheck : ""}`} type="number" id={`value${item.id}`} min={1} />
+                        </div>
                     </div>
                 </div>
                 <div className={"flex items-center gap-2"}>
@@ -550,8 +561,11 @@ function ItemVehicle({ item, items, checkFields }) {
                             </div>
                         </div>
                     </div>
-                    <div className={"flex flex-col gap-1"}>
-                        <div className={"font-semibold text-lg"}>¿Conoces las dimensiones?</div>
+                    <div className={"flex flex-col gap-2"}>
+                        <div className={"flex flex-col"}>
+                            <div className={"font-semibold text-lg"}>¿Conoces las dimensiones?</div>
+                            <p className={"text-neutral-600 text-sm"}>Si no conoces las dimensiones, simplemente haz click en siguiente.</p>
+                        </div>
                         <div className={"grid grid-cols-4 gap-2"}>
                             <div>
                                 <label className={"font-semibold text-sm"} htmlFor={`weight${item.id}`}>Peso</label>

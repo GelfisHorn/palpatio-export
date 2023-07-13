@@ -1,7 +1,8 @@
 "use client"
 
-// Components
+// Helpers
 import { formatMoney } from "@/app/helpers/formatMoney";
+// Components
 import OrderNavbar from "../Navbar";
 // Styles
 import styles from './Index.module.css'
@@ -9,6 +10,7 @@ import styles from './Index.module.css'
 import useAppContext from "@/app/hooks/useAppContext";
 // Toast
 import { Toaster } from 'react-hot-toast';
+import { COUNTRIES } from "@/app/config/order/order";
 
 export default function OrderLayout({ children, step, showSidebar }) {
     
@@ -35,7 +37,7 @@ export default function OrderLayout({ children, step, showSidebar }) {
                                 <div className={"text-2xl"}>Resumen del pedido</div>
                                 <div className={"divide-y"}>
                                     <Step title={"Datos iniciales"}>
-                                        <Option label={"Desde"} option={order.from || "Sin seleccionar"} />
+                                        <Option label={"Desde"} option={COUNTRIES[order.from] || "Sin seleccionar"} />
                                         <Option label={"Hacia"} option={"República Dominicana"} />
                                     </Step>
                                     <Step title={"Pedido"}>

@@ -4,7 +4,7 @@ const orderSchema = mongoose.Schema({
     fromCountry: {
         type: String,
         required: true,
-        enum: ['CH', 'FR', 'AT', 'BE', 'NL', 'LU']
+        enum: ['CH', 'FR', 'AT', 'BE', 'NL', 'LU', 'DE']
     },
     items: [
         {
@@ -17,39 +17,8 @@ const orderSchema = mongoose.Schema({
                 type: String,
                 trim: true
             },
-            amount: {
-                type: Number,
-                min: 1,
-                max: 10,
-                required: true
-            },
-            weight: {
-                type: Number,
-                min: 1
-            },
-            width: {
-                type: Number,
-                min: 1,
-                max: 500
-            },
-            length: {
-                type: Number,
-                min: 1,
-                max: 500
-            },
-            height: {
-                type: Number,
-                min: 1,
-                max: 500
-            },
             content: {
-                type: String,
-                required: true
-            },
-            value: {
-                type: Number,
-                min: 1,
-                required: true
+                type: String
             },
             images: [String]
         }
@@ -113,11 +82,13 @@ const orderSchema = mongoose.Schema({
         },
         note: {
             type: String
+        },
+        status: {
+            type: String,
+            required: true,
+            default: "onhold",
+            enum: ["onhold", "sending", "received", "cancelled"]
         }
-    },
-    total: {
-        type: Number,
-        required: true
     }
 }, {
     timestamps: true

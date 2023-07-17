@@ -6,6 +6,7 @@ const AppContext = createContext();
 
 export function AppContextProvider({ children }) {
 
+    const [ fetchingAuth, setFetchingAuth ] = useState(true);
     const [ auth, setAuth ] = useState({});
 
     useEffect(() => {
@@ -15,6 +16,7 @@ export function AppContextProvider({ children }) {
     async function getProfile() {
         const token = localStorage.getItem('auth-token');
         if (!token) {
+            setFetchingAuth(false);
             return;
         }
 
@@ -30,7 +32,9 @@ export function AppContextProvider({ children }) {
             setAuth(data);
         } catch (error) {
             setAuth({});
-            localStorage.setItem('auth-token', null);
+            localStorage.removeItem("auth-token");
+        } finally {
+            setFetchingAuth(false);
         }
     }
 
@@ -78,6 +82,7 @@ export function AppContextProvider({ children }) {
 
     return (
         <AppContext.Provider value={{
+            fetchingAuth,
             auth,
             setAuth,
             order, 

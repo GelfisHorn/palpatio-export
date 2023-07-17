@@ -1,9 +1,21 @@
+"use client"
+
+// React
+import { useEffect } from "react";
+// Nextjs
+import { useRouter } from "next/navigation";
+// Components
 import Layout from "../components/Dashboard/Layout";
 
 export default function DashboardIndex() {
+
+    const router = useRouter();
+
+    useEffect(() => {
+        router.push('/dashboard/orders');
+    }, [])
+
     return (
-        <Layout>
-            
-        </Layout>
+        <Layout tab={"home"}></Layout>
     )
 }

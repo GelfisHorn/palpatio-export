@@ -58,7 +58,7 @@ export default function OrderShipping() {
         const updatedOrder = { fromCountry: order.from, items: order.items, shipping, total: order.total };
         
         try {
-            await axios.post('/api/order/create', updatedOrder);
+            await axios.post('/api/orders/create', updatedOrder);
             setOrderCompleted(true);
             resetForm();
             router.push('/order/completed');

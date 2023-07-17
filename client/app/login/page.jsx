@@ -6,6 +6,7 @@ import { useState } from 'react'
 // Nextjs
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
 // Components
 import Layout from '../components/Layout'
 // Notifications
@@ -17,6 +18,8 @@ import useAppContext from "@/app/hooks/useAppContext";
 
 export default function Login() {
     
+    const router = useRouter();
+
     const { auth, setAuth } = useAppContext();
 
     const [ email, setEmail ] = useState("");
@@ -39,7 +42,11 @@ export default function Login() {
             resetForm();
             setAuth(data);
             localStorage.setItem('auth-token', data.token);
+            toast.success("Redireccionando...");
             toast.success("Has iniciado sesión correctamente!");
+            setTimeout(() => {
+                router.push('/dashboard');
+            }, 2000)
         } catch (error) {
             toast.error(error?.response?.data?.msg || "Hubo un error al iniciar sesión");
         }

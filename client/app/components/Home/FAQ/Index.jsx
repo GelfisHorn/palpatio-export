@@ -87,14 +87,14 @@ function Item({ title, description }) {
                             initial={{ rotate: 180 }}
                             animate={{ rotate: 0 }}
                             exit={{ rotate: 180 }}
-                            className="fa-solid fa-minus"
+                            className="fa-solid fa-angle-up"
                         ></motion.i>
                     ) : (
                         <motion.i
                             initial={{ rotate: 180 }}
                             animate={{ rotate: 0 }}
                             exit={{ rotate: 180 }}
-                            className="fa-solid fa-plus"
+                            className="fa-solid fa-angle-down"
                         ></motion.i>
                     )}
                 </AnimatePresence>

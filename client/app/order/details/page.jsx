@@ -391,7 +391,7 @@ function Item({ item, items, checkFields }) {
                             <div className={"font-semibold text-lg"}>¿Qué vas a enviar? <span className={"text-base font-normal text-neutral-600"}>(Opcional)</span></div>
                             <div className={"grid grid-cols-2 gap-3"}>
                                 {BUTTONS[item.type].map(btn => (
-                                    <button className={`border-[0.125rem] border-primary text-primary hover:bg-primary hover:text-white transition-colors py-[0.625rem] rounded-full font-semibold ${btn.id == content ? "text-white bg-primary" : null}`} onClick={() => handleSetContent(btn.id)}>
+                                    <button key={btn.id} className={`border-[0.125rem] border-primary text-primary hover:bg-primary hover:text-white transition-colors py-[0.625rem] rounded-full font-semibold ${btn.id == content ? "text-white bg-primary" : null}`} onClick={() => handleSetContent(btn.id)}>
                                         <div>{btn.name}</div>
                                     </button>
                                 ))}

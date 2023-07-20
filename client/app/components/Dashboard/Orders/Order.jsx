@@ -87,8 +87,8 @@ export default function DashboardOrder({ order, setOrder, loading }) {
                                                 whileInView={{ opacity: 1, y: 0 }}
                                                 exit={{ opacity: 0, y: -5 }}
                                             >
-                                                {Object.keys(STATUS).map(status => (
-                                                    <button onClick={() => handleChangeStatus(status)} className={"px-4 py-2 hover:bg-neutral-100 w-full"}>{STATUS[status].text}</button>
+                                                {Object.keys(STATUS).map((status, index) => (
+                                                    <button key={index} onClick={() => handleChangeStatus(status)} className={"px-4 py-2 hover:bg-neutral-100 w-full"}>{STATUS[status].text}</button>
                                                 ))}
                                             </motion.div>
                                         )}

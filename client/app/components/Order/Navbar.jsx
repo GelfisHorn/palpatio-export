@@ -64,7 +64,7 @@ export default function OrderNavbar({ step }) {
                 </div>
                 <div className={"block md:hidden pl-3"}>
                     <div onClick={handleShowMenu} className={"text-2xl hover:text-primary cursor-pointer transition-colors"}>
-                        <i class="fa-regular fa-bars"></i>
+                        <i className="fa-regular fa-bars"></i>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@ function NavbarMenu({ handleClose }) {
             >
                 <div className={"flex items-center justify-between py-5 px-6"}>
                     <div className={"text-xl font-semibold"}>Pal Patio Export</div>
-                    <button onClick={handleClose} className={"text-2xl hover:text-primary transition-colors"}><i class="fa-regular fa-xmark"></i></button>
+                    <button onClick={handleClose} className={"text-2xl hover:text-primary transition-colors"}><i className="fa-regular fa-xmark"></i></button>
                 </div>
                 <div className={"flex flex-col items-center gap-4 pb-8 text-base"}>
                     <Link href={"/login"} className={"hover:text-primary transition-colors font-medium"}>Iniciar sesión</Link>

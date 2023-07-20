@@ -5,7 +5,7 @@ import { useEffect } from "react";
 // Nextjs
 import { useRouter } from "next/navigation";
 // Components
-import Layout from "../components/Dashboard/Layout";
+import Layout from "@/app/components/Dashboard/Layout";
 
 export default function DashboardIndex() {
 

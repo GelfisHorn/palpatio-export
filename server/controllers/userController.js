@@ -1,8 +1,12 @@
+import mongoose from "mongoose"
 import User from "../models/User.js"
 import createToken from "../helpers/createToken.js"
 import createJWT from '../helpers/createJWT.js'
 import sendRegisterMail from "../hooks/confirm/sendMail.js"
 import sendResetPassMail from "../hooks/resetPassword/sendMail.js"
+import locales from '../locales/controllers/user.js'
+
+const ObjectId = mongoose.Types.ObjectId;
 
 const register = async (req, res) => {
     const { email, name, surname, password } = req.body
@@ -18,13 +22,14 @@ const register = async (req, res) => {
         if (!email || !name || !surname || !password) {
             return res.status(400).json({ msg: 'Some fields are missing', success: false });
         }
-        const user = new User(req.body);
+        const user = new User({ name, surname, email, password });
         const token = createToken();
         user.token = token;
         await user.save();
         sendRegisterMail({ email, token })
         res.status(200).json({ success: true });
     } catch (err) {
+        console.log(err)
         const error = new Error('There was an error creating account')
         return res.status(403).json({ msg: error.message, success: false })
     }
@@ -58,6 +63,7 @@ const authenticate = async (req, res) => {
         return res.json({
             _id: user._id,
             name: user.name,
+            surname: user.surname,
             email: user.email,
             token: createJWT(user._id),
             wallet: user.wallet
@@ -139,32 +145,45 @@ const newPassword = async (req, res) => {
 }
 
 const profile = async (req, res) => {
-    const { user } = req
+    const { user } = req;
 
     return res.json(user)
 }
 
 const editProfile = async (req, res) => {
-    const { name, email, password, userId } = req.body
+    const { _id } = req.user;
+    const { name, surname, email, currentPassword, password } = req.body
 
-    if (String(userId).match(/^[0-9a-fA-F]{24}$/)) {
-        const user = await User.findOne({ userId })
-        if (!user) {
-            return
+    if(!ObjectId.isValid(_id)) {
+        return res.status(404).json({ msg: "Not valid user id" })
+    }
+
+    let user = {};
+    try {
+        user = await User.findOne({ _id })
+    } catch (error) {
+        return res.status(404).json({ msg: "User doesn't exists" })
+    }
+
+    if(password) {
+        const checkPassword = await user.checkPassword(currentPassword);
+        if(!checkPassword) {
+            return res.status(403).json({ msg: {
+                en: locales.EN.editProfile.wrongPassword,
+                es: locales.ES.editProfile.wrongPassword
+            }});
         }
+    }
 
-        if (String(name).length < 20) {
-            try {
-                user.name = name
-                user.email = email
-                user.password = password
-                await user.save()
-                return res.json(user)
-            } catch (error) {
-                return res.json({ success: false })
-            }
-
-        }
+    try {
+        if(name) user.name = name;
+        if(surname) user.surname = surname;
+        if (email) user.email = email;
+        if (password) user.password = password;
+        await user.save()
+        return res.status(200).json({ success: true, msg: "Account edited successfully" })
+    } catch (error) {
+        return res.status(500).json({ success: false })
     }
 }
 

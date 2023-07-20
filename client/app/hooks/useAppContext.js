@@ -1,5 +1,3 @@
-"use client"
-
 // React
 import { useContext } from "react"
 // Context

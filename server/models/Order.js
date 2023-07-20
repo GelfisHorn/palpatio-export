@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import STATUS from '../config/orderStatus.js'
 
 const orderSchema = mongoose.Schema({
     fromCountry: {
@@ -83,12 +84,26 @@ const orderSchema = mongoose.Schema({
         note: {
             type: String
         },
-        status: {
+    },
+    contact: {
+        name: {
             type: String,
-            required: true,
-            default: "onhold",
-            enum: ["onhold", "sending", "received", "cancelled"]
+            required: true
+        },
+        email: {
+            type: String,
+            required: true
+        },
+        phoneNumber: {
+            type: String,
+            required: true
         }
+    },
+    status: {
+        type: String,
+        required: true,
+        enum: Object.values(STATUS),
+        default: STATUS.onhold
     }
 }, {
     timestamps: true

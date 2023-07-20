@@ -1,4 +1,3 @@
-"use client"
 
 import { useEffect } from "react";
 // Nextjs
@@ -11,6 +10,7 @@ import useAppContext from "@/app/hooks/useAppContext";
 import { Toaster } from "react-hot-toast";
 // Styles
 import styles from './Layout.module.css'
+import '@/styles/globals.css';
 
 export default function DashboardLayout({ tab, children }) {
     

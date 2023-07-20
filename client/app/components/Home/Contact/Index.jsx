@@ -52,7 +52,7 @@ export default function Contact() {
                     <div className={""}>
                         <button className={"flex items-center justify-center gap-2 bg-[#323232] hover:bg-[#252525] transition-colors rounded-[.2rem] text-white py-2 w-full"} type={'submit'}>
                             <span>Enviar Mensaje</span>
-                            <i class="fa-regular fa-arrow-right-long text-lg"></i>
+                            <i className="fa-regular fa-arrow-right-long text-lg"></i>
                         </button>
                     </div>
                 </div>

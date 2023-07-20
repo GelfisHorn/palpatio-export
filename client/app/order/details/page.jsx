@@ -172,6 +172,7 @@ export default function OrderIndex() {
                                 />
                                 <AddItem
                                     type={"pallet"}
+                                    content={"pallet"}
                                     icon={"fa-solid fa-pallet-box"}
                                     text={"Añadir pallet"}
                                     items={{ state: items, setState: setItems }}
@@ -376,7 +377,7 @@ function Item({ item, items, checkFields }) {
                             <div className={"flex flex-col gap-2"}>
                                 <div className={"font-semibold text-lg"}>¿Tienes imágenes? <span className={"text-base font-normal text-neutral-600"}>(Opcional)</span></div>
                                 <label className={"flex items-center justify-center gap-3 w-full bg-neutral-800 hover:bg-black transition-colors text-white py-3 rounded-full cursor-pointer"} htmlFor={`file${item.id}`}>
-                                    <i class="fa-light fa-upload text-lg"></i>
+                                    <i className="fa-light fa-upload text-lg"></i>
                                     <span>Adjuntar imágen</span>
                                 </label>
                                 <input onChange={e => setImagesInput(e.target.files)} multiple={true} className={"hidden"} type="file" name="" id={`file${item.id}`} />
@@ -405,13 +406,13 @@ function Item({ item, items, checkFields }) {
     )
 }
 
-function AddItem({ type, icon, text, items }) {
+function AddItem({ type, content, icon, text, items }) {
 
     const handleAddItem = () => {
         items.setState(items.state.concat({
             id: randomId(),
             type,
-            content: "",
+            content: content || "",
         }));
     }
 

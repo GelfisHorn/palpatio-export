@@ -18,18 +18,19 @@ const register = async (req, res) => {
         return res.status(400).json({ msg: error.message, success: false });
     }
 
+    if (!email || !name || !surname || !password) {
+        return res.status(400).json({ msg: 'Some fields are missing', success: false });
+    }
+    
     try {
-        if (!email || !name || !surname || !password) {
-            return res.status(400).json({ msg: 'Some fields are missing', success: false });
-        }
         const user = new User({ name, surname, email, password });
         const token = createToken();
         user.token = token;
         await user.save();
+        // TODO: Verificar si hay ordenes con el email del usuario y asignarlas al mismo.
         sendRegisterMail({ email, token })
         res.status(200).json({ success: true });
     } catch (err) {
-        console.log(err)
         const error = new Error('There was an error creating account')
         return res.status(403).json({ msg: error.message, success: false })
     }

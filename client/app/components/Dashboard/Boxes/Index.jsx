@@ -1,14 +1,10 @@
 import axios from "axios";
 // React
 import { useEffect, useState } from "react";
-// Nextjs
-import Link from "next/link";
 // Components
 import DashboardLayout from "@/app/components/Dashboard/Layout";
 // Notifications
 import { toast } from "react-hot-toast";
-// Config
-import { COUNTRIES } from '@/app/config/order/order';
 // Animations
 import { motion } from "framer-motion";
 // Date formatter
@@ -51,11 +47,11 @@ const STATUS = {
 
 export default function DashboardOrders() {
 
-    const [fetching, setFetching] = useState(true);
-    const [orders, setOrders] = useState([]);
-    const [filteredOrders, setFilteredOrders] = useState([]);
-    const [status, setStatus] = useState('onhold');
-    const [tabsCount, setTabsCount] = useState({ onhold: 0, sending: 0, received: 0, cancelled: 0 });
+    const [ fetching, setFetching ] = useState(true);
+    const [ orders, setOrders ] = useState([]);
+    const [ filteredOrders, setFilteredOrders ] = useState([]);
+    const [ status, setStatus ] = useState('onhold');
+    const [ tabsCount, setTabsCount ] = useState({ onhold: 0, sending: 0, received: 0, cancelled: 0 });
 
     useEffect(() => {
         handleFetchOrders();
@@ -76,7 +72,7 @@ export default function DashboardOrders() {
         }
 
         try {
-            const { data } = await axios.post('/api/orders/getAll', { config });
+            const { data } = await axios.post('/api/orders/boxes/getAll', { config });
             setOrders(data);
             handleSetTabsCount(data);
             // Filter orders by status
@@ -109,10 +105,10 @@ export default function DashboardOrders() {
 
 
     return (
-        <DashboardLayout title={"Ordenes"} tab={"orders"}>
+        <DashboardLayout tab={"boxes"}>
             <div className={"flex flex-col h-full"}>
                 <div className={"flex flex-col gap-6 pt-6 lg:pt-8"}>
-                    <h2 className={"font-bold text-3xl mx-6 lg:mx-8"}>Ordenes</h2>
+                    <h2 className={"font-bold text-3xl mx-6 lg:mx-8"}>Ordenes de cajas</h2>
                     <div className={"flex gap-2 border-b px-3 lg:px-8"}>
                         <Tab handleClick={() => handleSetStatus("onhold")} active={status == 'onhold'} icon={STATUS.onhold.icon} color={STATUS.onhold.color} title={STATUS.onhold.text} count={tabsCount.onhold} />
                         <Tab handleClick={() => handleSetStatus("sending")} active={status == 'sending'} icon={STATUS.sending.icon} color={STATUS.sending.color} title={STATUS.sending.text} count={tabsCount.sending} />
@@ -135,10 +131,10 @@ export default function DashboardOrders() {
                                 <Order
                                     key={order._id}
                                     id={order._id}
-                                    country={order.fromCountry}
-                                    name={order.contact.name}
-                                    email={order.contact.email}
-                                    phoneNumber={order.contact.phoneNumber}
+                                    fullName={order.fullName}
+                                    email={order.email}
+                                    phoneNumber={order.phoneNumber}
+                                    amount={order.amount}
                                     status={order.status}
                                     createdAt={order.createdAt}
                                     updatedAt={order.updatedAt}
@@ -169,12 +165,11 @@ function Tab({ active, icon, color, title, count, handleClick }) {
     )
 }
 
-function Order({ id, country, name, email, phoneNumber, status, createdAt, updatedAt }) {
+function Order({ id, fullName, email, phoneNumber, amount, status, createdAt, updatedAt }) {
 
     return (
-        <motion.a
-            className={`px-4 md:px-8 py-4 md:py-6 border ${STATUS[status].color.border} rounded-xl transition-colors select-none`}
-            href={`/dashboard/orders/${id}`}
+        <motion.div
+            className={`px-4 md:px-8 py-4 md:py-6 border rounded-xl`}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
         >
@@ -188,20 +183,20 @@ function Order({ id, country, name, email, phoneNumber, status, createdAt, updat
                 </div>
                 <div className={"flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-6"}>
                     <div className={"flex items-center gap-2"}>
-                        <div className={"text-neutral-400"}><i className="fa-solid fa-location-dot"></i></div>
-                        <div className={"font-medium text-neutral-700"}>{COUNTRIES[country]}</div>
-                    </div>
-                    <div className={"flex items-center gap-2"}>
                         <div className={"text-neutral-400"}><i className="fa-solid fa-user"></i></div>
-                        <div className={"font-medium text-neutral-700 break-all"}>{name}</div>
+                        <div className={"font-medium text-neutral-700 break-all"}>{fullName}</div>
                     </div>
-                    <div className={"flex items-center gap-2"}>
+                    <a href={`mailto:${email}`} className={"flex items-center gap-2 text-neutral-700 hover:text-primary hover:underline transition-colors"}>
                         <div className={"text-neutral-400"}><i className="fa-solid fa-envelope"></i></div>
-                        <div className={"font-medium text-neutral-700 break-all"}>{email}</div>
-                    </div>
-                    <div className={"flex items-center gap-2"}>
+                        <div className={"font-medium break-all"}>{email}</div>
+                    </a>
+                    <a href={`tel:${phoneNumber}`} className={"flex items-center gap-2 text-neutral-700 hover:text-primary hover:underline transition-colors"}>
                         <div className={"text-neutral-400"}><i className="fa-solid fa-phone"></i></div>
-                        <div className={"font-medium text-neutral-700 break-all"}>{phoneNumber}</div>
+                        <div className={"font-medium break-all"}>{phoneNumber}</div>
+                    </a>
+                    <div className={"flex items-center gap-2"}>
+                        <div className={"text-neutral-400"}><i class="fa-solid fa-box"></i></div>
+                        <div className={"font-medium text-neutral-700 break-all"}>{amount}</div>
                     </div>
                 </div>
             </div>
@@ -211,7 +206,7 @@ function Order({ id, country, name, email, phoneNumber, status, createdAt, updat
                     <div className={"font-semibold"}>{dayjs(createdAt == updatedAt ? createdAt : updatedAt).fromNow(true)}.</div>
                 </div>
             </div>
-        </motion.a>
+        </motion.div>
     )
 }
 
@@ -224,7 +219,6 @@ function OrderSkeleton() {
                     <div className={"flex items-center gap-1 px-2 border rounded-md w-20 h-6 bg-neutral-200 animate-pulse"}></div>
                 </div>
                 <div className={"flex items-center gap-6"}>
-                    <div className={"flex items-center gap-2 rounded-md w-24 h-5 bg-neutral-200 animate-pulse"}></div>
                     <div className={"flex items-center gap-2 rounded-md w-24 h-5 bg-neutral-200 animate-pulse"}></div>
                     <div className={"flex items-center gap-2 rounded-md w-24 h-5 bg-neutral-200 animate-pulse"}></div>
                     <div className={"flex items-center gap-2 rounded-md w-24 h-5 bg-neutral-200 animate-pulse"}></div>

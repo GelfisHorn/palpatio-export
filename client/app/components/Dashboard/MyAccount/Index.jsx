@@ -56,7 +56,7 @@ export default function DashboardMyAccount() {
                 </div>
                 {Object.keys(auth).length != 0 && (
                     <motion.div 
-                        className={"overflow-y-scroll hide-scroll pt-6 gap-6 pb-4 sm:pb-8 px-3 sm:px-8 text-center sm:text-left"}
+                        className={"overflow-y-scroll hide-scrollbar pt-6 gap-6 pb-4 sm:pb-8 px-3 sm:px-8 text-center sm:text-left"}
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                     >

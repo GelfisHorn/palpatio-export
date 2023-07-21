@@ -5,6 +5,7 @@ import HeroSection from "./components/Home/Hero/Index"
 import QuoteOrder from "./components/Home/QuoteOrder/Index"
 import WhatSend from "./components/Home/WhatSend/Index"
 import FeaturedFeatures from "./components/Home/FeaturedFeatures/Index"
+import Boxes from "./components/Home/Boxes/Index"
 import Process from "./components/Home/Process/Index"
 import AboutUs from "./components/Home/AboutUs/Index"
 import FAQ from "./components/Home/FAQ/Index"
@@ -28,6 +29,7 @@ export default function Home() {
 			</div>
 			<div className={"divide-y"}>
 				<FeaturedFeatures />
+				<Boxes />
 				<Process />
 			</div>
 			<AboutUs />

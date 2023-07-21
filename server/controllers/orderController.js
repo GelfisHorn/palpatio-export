@@ -56,6 +56,7 @@ const create = async (req, res) => {
     try {
         const newOrder = new Order({ fromCountry, items, shipping, contact });
         await newOrder.save();
+        // TODO: Verificar si hay un usuario con el email de la orden y asignarlo al mismo.
         return res.status(200).json({ success: true })
     } catch (err) {
         console.log(err)

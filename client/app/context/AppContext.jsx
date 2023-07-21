@@ -8,10 +8,17 @@ export function AppContextProvider({ children }) {
     const [ auth, setAuth ] = useState({});
 
     useEffect(() => {
+        if(Object.keys(auth).length != 0) {
+            return;
+        }
         getProfile();
     }, [])
 
     async function getProfile() {
+        if (Object.keys(auth).length != 0) {
+            return;
+        }
+
         const token = localStorage.getItem('auth-token');
         if (!token) {
             setFetchingAuth(false);

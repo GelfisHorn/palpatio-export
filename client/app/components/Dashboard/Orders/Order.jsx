@@ -5,7 +5,7 @@ import Link from "next/link";
 import DashboardLayout from "@/app/components/Dashboard/Layout";
 // Config
 import { COUNTRIES } from '@/app/config/order/order';
-import { STATUS, TYPE, CATEGORY, CONTENT } from "@/pages/dashboard/orders/config/order";
+import { STATUS, TYPE, CATEGORY, CONTENT } from "@/config/Order";
 // Animations
 import { AnimatePresence, motion } from "framer-motion";
 // Notifications

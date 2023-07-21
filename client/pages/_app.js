@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Providers } from './ContextProviders';
+import { AppContextProvider } from '@/app/context/AppContext';
 
 export default function MyApp({ Component, pageProps }) {
     return (
@@ -9,9 +9,9 @@ export default function MyApp({ Component, pageProps }) {
                 <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css" />
                 <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css" />
             </Head>
-            <Providers>
+            <AppContextProvider>
                 <Component {...pageProps} />
-            </Providers>
+            </AppContextProvider>
         </>
     )
 }

@@ -32,6 +32,7 @@ const CONFIRMED = {
     }
 }
 
+// TODO: Pagination component
 export default function DashboardClients() {
 
     const [ fetching, setFetching ] = useState(true);
@@ -92,8 +93,8 @@ export default function DashboardClients() {
                     )}
                     {!fetching && clients.length != 0 && (
                         <div className={"flex flex-col gap-4 mx-3 lg:mx-8"}>
-                            {clients.map(client => (
-                                <Client client={client}/>
+                            {clients.map((client, index) => (
+                                <Client key={index} client={client}/>
                             ))}
                         </div>
                     )}

@@ -145,11 +145,7 @@ export default function OrderIndex() {
                             </div>
                             <div className={"flex flex-col gap-y-3"}>
                                 {order.items.map((item) => (
-                                    item.type != 'vehicle' ? (
-                                        <Item key={item.id} item={item} items={{ state: items, setState: setItems }} checkFields={checkFields} />
-                                    ) : (
-                                        <ItemVehicle key={item.id} item={item} items={{ state: items, setState: setItems }} checkFields={checkFields} />
-                                    )
+                                    <Item key={item.id} item={item} items={{ state: items, setState: setItems }} checkFields={checkFields} />
                                 ))}
                             </div>
                         </div>
@@ -176,6 +172,7 @@ export default function OrderIndex() {
                                 />
                                 <AddItem
                                     type={"pallet"}
+                                    content={"pallet"}
                                     icon={"fa-solid fa-pallet-box"}
                                     text={"Añadir pallet"}
                                     items={{ state: items, setState: setItems }}
@@ -211,6 +208,10 @@ export default function OrderIndex() {
 function Item({ item, items, checkFields }) {
 
     const type = {
+        "vehicle": {
+            "title": "Vehiculo",
+            "icon": "fa-solid fa-car"
+        },
         "furniture": {
             "title": "Mueble",
             "icon": "fa-solid fa-loveseat"
@@ -233,219 +234,92 @@ function Item({ item, items, checkFields }) {
         }
     }
 
-    // Price state
-    const [ subTotal, setSubTotal ] = useState(PRICE_DEFAULT[item.type]); 
-    // Item state
-    const [ amount, setAmount ] = useState(item.amount || 1);
-    const [ weight, setWeight ] = useState(item.weight || "");
-    const [ length, setLength] = useState(item.length || "");
-    const [ width, setWidth ] = useState(item.width || "");
-    const [ height, setHeight ] = useState(item.height || "");
-    const [ content, setContent ] = useState(item.content || "");
-    const [ value, setValue ] = useState(item.value || "");
-    const [ images, setImages ] = useState([]);
-    // Input file (images)
-    const [ imagesInput, setImagesInput ] = useState([]);
-
-    // Add remove amount
-    const handleAddOne = () => {
-        if (amount >= MAX_AMOUNT) return;
-
-        setAmount(current => current + 1);
-    }
-    const handleRemoveOne = () => {
-        if (amount == 1) return;
-
-        setAmount(current => current - 1);
-    }
-
-    const handleRemoveItem = () => {
-        const newItems = items.state.filter(filterItem => filterItem.id != item.id);
-        items.setState(newItems);
-    }
-
-    const calculateSubTotal = (type) => {
-        const weightTotal = Math.floor(weight / PRICE.weight.each) * PRICE.weight.price;
-        const lengthTotal = Math.floor(length / PRICE.length.each) * PRICE.length.price;
-        const widthTotal = Math.floor(width / PRICE.width.each) * PRICE.width.price;
-        const heightTotal = Math.floor(height / PRICE.height.each) * PRICE.height.price;
-        const total = (PRICE_DEFAULT[type] + (weightTotal + lengthTotal + widthTotal + heightTotal)) * amount;
-        return total;
-    }
-
-    useEffect(() => {
-        let ready = true;
-        if ([content, value].includes("")) ready = false;
-        if (content.length < 1) ready = false;
-        if (Number(value) < 1) ready = false;
-        const newState = items.state.map(mapItem => {
-            if (mapItem.id == item.id) {
-                return { ...mapItem, amount, weight, length, width, height, content, value, images, subTotal: calculateSubTotal(item.type), ready }
+    const BUTTONS = {
+        "vehicle": [
+            {
+                "id": "truck",
+                "name": "Camión"
+            },
+            {
+                "id": "car",
+                "name": "Auto"
+            },
+            {
+                "id": "engine",
+                "name": "Motor"
             }
-            return mapItem;
-        })
-        items.setState(newState);
-        setSubTotal(calculateSubTotal(item.type));
-    }, [amount, weight, length, width, height, content, value, images]);
-
-    const handleCheckNumberInput = (field) => {
-        /* if([field].includes("")) {
-            return [field].includes("")
-        } */
-        if (field < 1) {
-            return field < 1
-        }
-
-        return false;
+        ],
+        "furniture": [
+            {
+                "id": "chair",
+                "name": "Silla"
+            },
+            {
+                "id": "table",
+                "name": "Mesa"
+            }
+        ],
+        "package": [
+            {
+                "id": "small",
+                "name": "Chico"
+            },
+            {
+                "id": "medium",
+                "name": "Mediano"
+            },
+            {
+                "id": "big",
+                "name": "Grande"
+            }
+        ],
+        "pallet": null,
+        "tank": [
+            {
+                "id": "water",
+                "name": "Agua"
+            },
+            {
+                "id": "fuel",
+                "name": "Combustible"
+            },
+            {
+                "id": "storage",
+                "name": "Almacenamiento"
+            },
+            {
+                "id": "gas",
+                "name": "Gas"
+            }
+        ],
+        "other": [
+            {
+                "id": "tools",
+                "name": "Herramientas"
+            },
+            {
+                "id": "gardening",
+                "name": "Jardinería"
+            },
+            {
+                "id": "travel",
+                "name": "Articulos de viaje"
+            },
+            {
+                "id": "electronics",
+                "name": "Electrónicos"
+            }
+        ]
     }
 
-    const handleCheckTextInput = (textarea) => {
-        if ([textarea].includes("")) {
-            return [textarea].includes("");
-        }
-        if (textarea.length < 1) {
-            return textarea.length < 1;
-        }
-
-        return false;
-    }
-
-    // Modal
-    const [isOpen, setIsOpen] = useState(false)
-
-    useEffect(() => {
-        if (imagesInput.length > 0) {
-            openModal();
-        }
-    }, [imagesInput]);
-
-    function closeModal() {
-        setIsOpen(false)
-    }
-
-    function openModal() {
-        setIsOpen(true)
-    }
-
-    return (
-        <div className={"shadow-md border rounded-md"}>
-            <div className={"flex justify-between bg-neutral-100 rounded-t-md py-2 px-2 sm:px-5"}>
-                <div className={"flex items-center gap-5"}>
-                    <div className={"flex items-center gap-2"}>
-                        <i className={type[item.type].icon} />
-                        <div className={"font-semibold text-sm"}>{type[item.type].title}</div>
-                    </div>
-                    <div className={"flex items-center gap-2 text-sm"}>
-                        <button onClick={handleRemoveOne} className={`${amount > 1 ? "text-black" : "text-neutral-500 cursor-default"}`}>
-                            <i className="fa-solid fa-minus"></i>
-                        </button>
-                        <div className={"font-semibold w-4 text-center"}>{amount}</div>
-                        <button onClick={handleAddOne} className={`${amount < MAX_AMOUNT ? "text-primary" : "text-neutral-500 cursor-default"}`}>
-                            <i className="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-                <button onClick={handleRemoveItem} className={"text-sm text-neutral-700 hover:text-red-500 transition-colors"}>
-                    <i className="fa-solid fa-trash"></i>
-                </button>
-            </div>
-            <div className={"flex flex-col gap-3 py-2 sm:py-5 px-2 sm:px-6 bg-white rounded-b-md"}>
-                <div className={'flex flex-col gap-2'}>
-                    <div className={"flex flex-col"}>
-                        <div className={"font-semibold text-lg"}>¿Conoces las dimensiones?</div>
-                        <p className={"text-neutral-600 text-sm"}>Si no conoces las dimensiones, simplemente haz click en siguiente.</p>
-                    </div>
-                    <div className={"grid grid-cols-4 grid-rows-2 gap-2"}>
-                        <div>
-                            <label className={"font-semibold text-sm"} htmlFor={`weight${item.id}`}>Peso</label>
-                            <div className={"relative"}>
-                                <input value={weight} onChange={e => setWeight(e.target.value > UNITS_MAX.weight ? UNITS_MAX.weight : e.target.value)} className={`${styles.input}`} type="number" id={`weight${item.id}`} max={1000} min={1} />
-                                <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>kg</span>
-                            </div>
-                        </div>
-                        <div>
-                            <label className={"font-semibold text-sm"} htmlFor={`length${item.id}`}>Largo</label>
-                            <div className={"relative"}>
-                                <input value={length} onChange={e => setLength(e.target.value > UNITS_MAX.length ? UNITS_MAX.length : e.target.value)} className={`${styles.input}`} type="number" id={`length${item.id}`} max={1000} min={1} />
-                                <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>cm</span>
-                            </div>
-                        </div>
-                        <div>
-                            <label className={"font-semibold text-sm"} htmlFor={`width${item.id}`}>Ancho</label>
-                            <div className={"relative"}>
-                                <input value={width} onChange={e => setWidth(e.target.value > UNITS_MAX.width ? UNITS_MAX.width : e.target.value)} className={`${styles.input}`} type="number" id={`width${item.id}`} max={1000} min={1} />
-                                <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>cm</span>
-                            </div>
-                        </div>
-                        <div>
-                            <label className={"font-semibold text-sm"} htmlFor={`height${item.id}`}>Alto</label>
-                            <div className={"relative"}>
-                                <input value={height} onChange={e => setHeight(e.target.value > UNITS_MAX.height ? UNITS_MAX.height : e.target.value)} className={`${styles.input}`} type="number" id={`height${item.id}`} max={1000} min={1} />
-                                <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>cm</span>
-                            </div>
-                        </div>
-                        <div className={"col-start-1 col-end-4"}>
-                            <label className={"font-semibold text-sm"} htmlFor={`content${item.id}`}>Contenido</label>
-                            <input value={content} onChange={e => setContent(e.target.value)} className={`${styles.input} ${checkFields ? handleCheckTextInput(content) ? styles.inputError : styles.inputCheck : ""}`} type="text" id={`content${item.id}`} />
-                        </div>
-                        <div className={"col-start-4 col-end-5"}>
-                            <label className={"font-semibold text-sm"} htmlFor={`value${item.id}`}>Valor (€)</label>
-                            <input value={value} onChange={e => setValue(e.target.value)} className={`${styles.input} ${checkFields ? handleCheckNumberInput(value) ? styles.inputError : styles.inputCheck : ""}`} type="number" id={`value${item.id}`} min={1} />
-                        </div>
-                    </div>
-                </div>
-                <div className={"flex items-center gap-2"}>
-                    <div className={"w-fit"}>
-                        <label className={"text-primary cursor-pointer"} htmlFor={`file${item.id}`}>Adjuntar imágen</label>
-                        <input onChange={e => setImagesInput(e.target.files)} multiple={true} className={"hidden"} type="file" name="" id={`file${item.id}`} />
-                    </div>
-                    {imagesInput.length ? (
-                        <>
-                            <div><i className="fa-solid fa-hyphen"></i></div>
-                            <div className={""}>{imagesInput.length} imágenes adjuntas</div>
-                        </>
-                    ) : null}
-                </div>
-                <div>
-                    <div className={"text-sm text-neutral-600"}>Precio estimado: <span className={"text-neutral-800 font-bold"}>{formatMoney(subTotal)}</span></div>
-                    {[weight, length, width, height].includes("") && (<div className={"text-xs text-neutral-600"}>{"(Excluyendo dimensiones)"}</div>)}
-                </div>
-            </div>
-            <Modal images={imagesInput} setImages={setImages} isOpen={isOpen} closeModal={closeModal} />
-        </div>
-    )
-}
-
-function ItemVehicle({ item, items, checkFields }) {
-
-    // Price state
-    const [ subTotal, setSubTotal ] = useState(PRICE_DEFAULT[item.type]); 
     // Item state
-    const [ amount, setAmount ] = useState(item.amount || 1);
-    const [ weight, setWeight ] = useState(item.weight || "");
-    const [ length, setLength] = useState(item.length || "");
-    const [ width, setWidth ] = useState(item.width || "");
-    const [ height, setHeight ] = useState(item.height || "");
     const [ content, setContent ] = useState(item.content || "");
-    const [ value, setValue ] = useState(item.value || "");
-    const [ category, setCategory ] = useState(item.category || "");
     const [ images, setImages ] = useState([]);
     // Input file (images)
     const [ imagesInput, setImagesInput ] = useState([]);
 
-    // Select state
-    const [ showSelect, setShowSelect ] = useState(false);
-
-    // Add remove amount
-    const handleAddOne = () => {
-        if(amount >= MAX_AMOUNT) return;
-
-        setAmount(current => current + 1);
-    }
-    const handleRemoveOne = () => {
-        if (amount == 1) return;
-
-        setAmount(current => current - 1);
+    const handleSetContent = (value) => {
+        setContent(value)
     }
 
     const handleRemoveItem = () => {
@@ -453,48 +327,18 @@ function ItemVehicle({ item, items, checkFields }) {
         items.setState(newItems);
     }
 
-    const calculateSubTotal = (type) => {
-        const weightTotal = Math.floor(weight / VEHICLE_PRICE.weight.each) * VEHICLE_PRICE.weight.price;
-        const lengthTotal = Math.floor(length / VEHICLE_PRICE.length.each) * VEHICLE_PRICE.length.price;
-        const widthTotal = Math.floor(width / VEHICLE_PRICE.width.each) * VEHICLE_PRICE.width.price;
-        const heightTotal = Math.floor(height / VEHICLE_PRICE.height.each) * VEHICLE_PRICE.height.price;
-        const total = PRICE_DEFAULT[type] + (weightTotal + lengthTotal + widthTotal + heightTotal);
-        return total;
-    }
-
     useEffect(() => {
         let ready = true;
-        if ([content, value, category].includes("")) ready = false;
+        if ([content].includes("")) ready = false;
         if (content.length < 1) ready = false;
-        if (Number(value) < 1) ready = false;
         const newState = items.state.map(mapItem => {
             if (mapItem.id == item.id) {
-                return { ...mapItem, category, amount, weight, length, width, height, content, value, images, subTotal: calculateSubTotal(category || item.type), content, ready }
+                return { ...mapItem, content, images, ready }
             }
             return mapItem;
         })
         items.setState(newState)
-        setSubTotal(calculateSubTotal(category || item.type));
-    }, [amount, weight, length, width, height, content, value, category, images]);
-
-    const handleCheckNumberInput = (field) => {
-        if (field < 1) {
-            return field < 1;
-        }
-
-        return false;
-    }
-
-    const handleCheckTextInput = (textarea) => {
-        if ([textarea].includes("")) {
-            return [textarea].includes("");
-        }
-        if(textarea.length < 1) {
-            return textarea.length < 1;
-        }
-
-        return false;
-    }
+    }, [content, images]);
 
     // Modal
     const [isOpen, setIsOpen] = useState(false)
@@ -518,17 +362,8 @@ function ItemVehicle({ item, items, checkFields }) {
             <div className={"flex justify-between bg-neutral-100 rounded-t-md py-2 px-2 sm:px-5"}>
                 <div className={"flex items-center gap-5"}>
                     <div className={"flex items-center gap-2"}>
-                        <i className={"fa-solid fa-car"} />
-                        <div className={"font-semibold text-sm"}>Vehiculo</div>
-                    </div>
-                    <div className={"flex items-center gap-2 text-sm"}>
-                        <button onClick={handleRemoveOne} className={`${amount > 1 ? "text-black" : "text-neutral-500 cursor-default"}`}>
-                            <i className="fa-solid fa-minus"></i>
-                        </button>
-                        <div className={"font-semibold w-4 text-center"}>{amount}</div>
-                        <button onClick={handleAddOne} className={`${amount < MAX_AMOUNT ? "text-primary" : "text-neutral-500 cursor-default"}`}>
-                            <i className="fa-solid fa-plus"></i>
-                        </button>
+                        <i className={type[item.type].icon} />
+                        <div className={"font-semibold text-sm"}>{type[item.type].title}</div>
                     </div>
                 </div>
                 <button onClick={handleRemoveItem} className={"text-sm text-neutral-700 hover:text-red-500 transition-colors"}>
@@ -537,87 +372,33 @@ function ItemVehicle({ item, items, checkFields }) {
             </div>
             <div className={"flex flex-col gap-1 py-2 sm:py-5 px-2 sm:px-6 bg-white rounded-b-md"}>
                 <div className={"flex flex-col gap-3"}>
-                    <div className={"flex flex-col gap-1"}>
-                        <div className={"font-semibold text-lg"}>Tipo de Vehiculo</div>
-                        <div className={"grid grid-cols-1 sm:grid-cols-2 gap-5"}>
-                            <div className={"relative"}>
-                                <div onClick={() => setShowSelect(!showSelect)} className={`flex items-center justify-between cursor-pointer ${category ? "text-neutral-800" : "text-neutral-500"} transition-colors select-none bg-zinc-100 px-3 py-1 rounded-md text-base`}>
-                                    <div className={`font-semibold`}>{category ? VEHICLES[category] : "Selecciona una opción"}</div>
-                                    <i className="fa-solid fa-angle-down"></i>
-                                </div>
-                                {showSelect && (
-                                    <div className={"absolute top-8 bg-white rounded-b-md shadow-md border overflow-hidden w-full border-t-transparent z-10"}>
-                                        {Object.keys(VEHICLES).map(vehicle => (
-                                            <div key={vehicle}
-                                                onClick={() => {
-                                                    setCategory(vehicle)
-                                                    setShowSelect(false);
-                                                }}
-                                                className={"p-4 w-full hover:bg-neutral-100 transition-colors cursor-pointer text-sm"}>
-                                                {VEHICLES[vehicle]}</div>
-                                        ))}
-                                    </div>
-                                )}
+                    <div className={"grid grid-cols-2 gap-3"}>
+                        <div className={"flex flex-col gap-1"}>
+                            <div className={"flex flex-col gap-2"}>
+                                <div className={"font-semibold text-lg"}>¿Tienes imágenes? <span className={"text-base font-normal text-neutral-600"}>(Opcional)</span></div>
+                                <label className={"flex items-center justify-center gap-3 w-full bg-neutral-800 hover:bg-black transition-colors text-white py-3 rounded-full cursor-pointer"} htmlFor={`file${item.id}`}>
+                                    <i className="fa-light fa-upload text-lg"></i>
+                                    <span>Adjuntar imágen</span>
+                                </label>
+                                <input onChange={e => setImagesInput(e.target.files)} multiple={true} className={"hidden"} type="file" name="" id={`file${item.id}`} />
                             </div>
+                            {imagesInput.length ? (
+                                <div className={"text-center font-medium text-neutral-600"}>{imagesInput.length} {imagesInput.length == 1 ? "imágen adjunta" : "imágenes adjuntas"}</div>
+                            ) : null}
                         </div>
                     </div>
-                    <div className={"flex flex-col gap-2"}>
-                        <div className={"flex flex-col"}>
-                            <div className={"font-semibold text-lg"}>¿Conoces las dimensiones?</div>
-                            <p className={"text-neutral-600 text-sm"}>Si no conoces las dimensiones, simplemente haz click en siguiente.</p>
-                        </div>
-                        <div className={"grid grid-cols-4 gap-2"}>
-                            <div>
-                                <label className={"font-semibold text-sm"} htmlFor={`weight${item.id}`}>Peso</label>
-                                <div className={"relative"}>
-                                    <input value={weight} onChange={e => setWeight(e.target.value > UNITS_MAX.vehicle_weight ? UNITS_MAX.vehicle_weight : e.target.value)} className={`${styles.input}`} type="number" id={`weight${item.id}`} max={UNITS_MAX.vehicle_weight} min={1} />
-                                    <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>kg</span>
-                                </div>
-                            </div>
-                            <div>
-                                <label className={"font-semibold text-sm"} htmlFor={`length${item.id}`}>Largo</label>
-                                <div className={"relative"}>
-                                    <input value={length} onChange={e => setLength(e.target.value > UNITS_MAX.length ? UNITS_MAX.length : e.target.value)} className={`${styles.input}`} type="number" id={`length${item.id}`} max={1000} min={1} />
-                                    <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>cm</span>
-                                </div>
-                            </div>
-                            <div>
-                                <label className={"font-semibold text-sm"} htmlFor={`width${item.id}`}>Ancho</label>
-                                <div className={"relative"}>
-                                    <input value={width} onChange={e => setWidth(e.target.value > UNITS_MAX.width ? UNITS_MAX.width : e.target.value)} className={`${styles.input}`} type="number" id={`width${item.id}`} max={1000} min={1} />
-                                    <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>cm</span>
-                                </div>
-                            </div>
-                            <div>
-                                <label className={"font-semibold text-sm"} htmlFor={`height${item.id}`}>Alto</label>
-                                <div className={"relative"}>
-                                    <input value={height} onChange={e => setHeight(e.target.value > UNITS_MAX.height ? UNITS_MAX.height : e.target.value)} className={`${styles.input}`} type="number" id={`height${item.id}`} max={1000} min={1} />
-                                    <span className={"absolute top-1/2 -translate-y-1/2 right-2 text-xs font-bold text-neutral-500"}>cm</span>
-                                </div>
-                            </div>
-                            <div className={"col-start-1 col-end-4"}>
-                                <label className={"font-semibold text-sm"} htmlFor={`content${item.id}`}>Modelo</label>
-                                <input value={content} onChange={e => setContent(e.target.value)} className={`${styles.input} ${checkFields ? handleCheckTextInput(content) ? styles.inputError : styles.inputCheck : ""} resize-none`} type="text" id={`content${item.id}`} />
-                            </div>
-                            <div className={"col-start-4 col-end-5"}>
-                                <label className={"font-semibold text-sm"} htmlFor={`value${item.id}`}>Valor (€)</label>
-                                <input value={value} onChange={e => setValue(e.target.value)} className={`${styles.input} ${checkFields ? handleCheckNumberInput(value) ? styles.inputError : styles.inputCheck : ""}`} type="number" id={`value${item.id}`} min={1} />
+                    {BUTTONS[item.type] && (
+                        <div className={"flex flex-col gap-2"}>
+                            <div className={"font-semibold text-lg"}>¿Qué vas a enviar? <span className={"text-base font-normal text-neutral-600"}>(Opcional)</span></div>
+                            <div className={"grid grid-cols-2 gap-3"}>
+                                {BUTTONS[item.type].map(btn => (
+                                    <button key={btn.id} className={`border-[0.125rem] border-primary text-primary hover:bg-primary hover:text-white transition-colors py-[0.625rem] rounded-full font-semibold ${btn.id == content ? "text-white bg-primary" : null}`} onClick={() => handleSetContent(btn.id)}>
+                                        <div>{btn.name}</div>
+                                    </button>
+                                ))}
                             </div>
                         </div>
-                    </div>
-                    <div className={"flex flex-col sm:flex-row sm:items-center sm:gap-2"}>
-                        <div className={"w-fit"}>
-                            <label className={"text-primary cursor-pointer"} htmlFor={`file${item.id}`}>Adjuntar imágen</label>
-                            <input onChange={e => setImagesInput(e.target.files)} multiple={true} className={"hidden"} type="file" name="" id={`file${item.id}`} />
-                        </div>
-                        {imagesInput.length ? (
-                            <>
-                                <div className={"hidden sm:block"}><i className="fa-solid fa-hyphen"></i></div>
-                                <div className={""}>{imagesInput.length} imágenes adjuntas</div>
-                            </>
-                        ) : null}
-                    </div>
-                    <div className={"text-sm text-neutral-600"}>Precio estimado: <span className={"text-neutral-800 font-bold"}>{formatMoney(subTotal)}</span></div>
+                    )}
                 </div>
             </div>
             <Modal images={imagesInput} setImages={setImages} isOpen={isOpen} closeModal={closeModal} />
@@ -625,25 +406,18 @@ function ItemVehicle({ item, items, checkFields }) {
     )
 }
 
-function AddItem({ type, icon, text, items }) {
+function AddItem({ type, content, icon, text, items }) {
 
     const handleAddItem = () => {
         items.setState(items.state.concat({
             id: randomId(),
             type,
-            weight: "",
-            length: "",
-            width: "",
-            height: "",
-            content: "",
-            value: "",
-            amount: 1,
-            subTotal: 0
+            content: content || "",
         }));
     }
 
     return (
-        <button onClick={handleAddItem} className={`flex items-center justify-center gap-2 w-full py-3 border border-dashed border-neutral-400 text-neutral-600 rounded-md hover:bg-white hover:border-transparent hover:shadow-md ${styles.item}`}>
+        <button onClick={handleAddItem} className={`flex items-center justify-center gap-2 w-full py-3 border-2 border-white hover:border-primary text-neutral-600 rounded-md bg-white shadow-md ${styles.item}`}>
             <i className={icon}></i>
             <div className={"text-sm font-semibold"}>{text}</div>
         </button>

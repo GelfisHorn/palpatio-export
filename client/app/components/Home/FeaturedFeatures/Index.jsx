@@ -30,8 +30,8 @@ export default function FeaturedFeatures() {
                     />
                     <Card
                         icon={"fa-solid fa-ship"}
-                        title={"Rastreo en tiempo real"}
-                        description={"Con nuestro sistema de seguimiento en tiempo real, puedes estar al tanto de la ubicación exacta de tus paquetes durante todo el proceso de envío. Mantente informado y tranquilo mientras tus envíos están en movimiento."}
+                        title={"Envios mensuales"}
+                        description={"Realizamos envíos mensuales para satisfacer tus necesidades de entrega recurrente. Con nuestros envíos mensuales, puedes establecer un calendario predefinido para la entrega de tus paquetes, lo que te brinda mayor control y planificación."}
                     />
                 </div>
                 {/* <div className={"flex justify-center"}>

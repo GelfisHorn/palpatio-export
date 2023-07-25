@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
+import PERMISSIONS from "../config/permissions.js";
 
 const userSchema = mongoose.Schema({
     name: {
@@ -28,6 +29,11 @@ const userSchema = mongoose.Schema({
     },
     token: {
         type: String
+    },
+    permissions: {
+        type: String,
+        enum: Object.values(PERMISSIONS),
+        default: PERMISSIONS.client
     },
     confirmed: {
         type: Boolean,

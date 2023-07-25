@@ -20,25 +20,25 @@ export default function WhatSend() {
                 </div>
                 <div className={"grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 gap-y-6 sm:gap-y-10"}>
                     <Card
-                        src={"/order/car.webp"}
+                        src={"/order/car.webp?v=2"}
                         alt={"Car image"}
                         text={"Confía en nuestro servicio de envío de autos para trasladar tu vehículo de forma segura y confiable a cualquier destino. Nos encargamos de la logística completa, desde la recolección hasta la entrega. Embalaje especializado y cuidado extremo para garantizar que tu auto llegue en perfectas condiciones. Simplifica el envío de tu vehículo con nosotros."}
                         title={"Autos"}                    
                     />
                     <Card
-                        src={"/order/box.webp"}
+                        src={"/order/box.webp?v=1"}
                         alt={"Package image"}
                         text={"Nuestro servicio de envío de cajas ofrece comodidad y tranquilidad en cada envío. Desde pequeñas cajas personales hasta paquetes comerciales, nos encargamos de todo el proceso logístico. Opciones flexibles, embalaje profesional y seguimiento en línea para asegurar que tus cajas lleguen a su destino final sin complicaciones. Confía en nosotros para enviar tus cajas de manera confiable."}
                         title={"Paquetes"}                    
                     />
                     <Card
-                        src={"/order/furniture.webp"}
+                        src={"/order/furniture.webp?v=1"}
                         alt={"Furniture image"}
                         text={"Transfiere tus muebles con confianza a República Dominicana con nuestro servicio especializado de envío. Embalaje profesional, cuidado extremo y opciones flexibles para adaptarse a tus necesidades. Nos encargamos de todo el proceso logístico para que puedas disfrutar de un envío sin preocupaciones. Simplifica el envío de tus muebles con nuestro servicio confiable y de alta calidad."}
                         title={"Muebles"}                    
                     />
                     <Card
-                        src={"/order/tank.webp"}
+                        src={"/order/tank.webp?v=1"}
                         alt={"Tank image"}
                         text={"Nuestro servicio de envío de tanques te brinda la tranquilidad de transportar estos grandes contenedores de manera segura y eficiente. Contamos con la experiencia y los recursos necesarios para manejar el envío de tanques de forma especializada. Nos encargamos de la logística completa, desde la carga hasta la entrega, garantizando el cuidado y la integridad de tus tanques. Confía en nuestro servicio confiable para enviar tus tanques sin complicaciones."}
                         title={"Tanques"}                    

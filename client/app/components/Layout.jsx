@@ -1,5 +1,6 @@
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import WhatsAppButton from "./WhatsAppButton/Index";
 
 export default function Layout({ children, styles }) {
     return (
@@ -7,6 +8,7 @@ export default function Layout({ children, styles }) {
             <Navbar styles={styles?.navbar} />
             {children}
             <Footer />
+            <WhatsAppButton />
         </main>
     )   
 }

@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+import STATUS from '../config/orderStatus.js'
 
 const orderSchema = mongoose.Schema({
     fromCountry: {
         type: String,
         required: true,
-        enum: ['CH', 'FR', 'AT', 'BE', 'NL', 'LU']
+        enum: ['CH', 'FR', 'AT', 'BE', 'NL', 'LU', 'DE']
     },
     items: [
         {
@@ -17,39 +18,8 @@ const orderSchema = mongoose.Schema({
                 type: String,
                 trim: true
             },
-            amount: {
-                type: Number,
-                min: 1,
-                max: 10,
-                required: true
-            },
-            weight: {
-                type: Number,
-                min: 1
-            },
-            width: {
-                type: Number,
-                min: 1,
-                max: 500
-            },
-            length: {
-                type: Number,
-                min: 1,
-                max: 500
-            },
-            height: {
-                type: Number,
-                min: 1,
-                max: 500
-            },
             content: {
-                type: String,
-                required: true
-            },
-            value: {
-                type: Number,
-                min: 1,
-                required: true
+                type: String
             },
             images: [String]
         }
@@ -113,11 +83,27 @@ const orderSchema = mongoose.Schema({
         },
         note: {
             type: String
+        },
+    },
+    contact: {
+        name: {
+            type: String,
+            required: true
+        },
+        email: {
+            type: String,
+            required: true
+        },
+        phoneNumber: {
+            type: String,
+            required: true
         }
     },
-    total: {
-        type: Number,
-        required: true
+    status: {
+        type: String,
+        required: true,
+        enum: Object.values(STATUS),
+        default: STATUS.onhold
     }
 }, {
     timestamps: true

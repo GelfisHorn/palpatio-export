@@ -39,20 +39,20 @@ export default function Contact() {
                 <div className={"grid grid-cols-1 md:grid-cols-2 gap-5 w-full lg:w-2/3 xl:w-1/2 mx-auto"}>
                     <div className={"flex flex-col gap-1"}>
                         <label htmlFor="name">Tu nombre</label>
-                        <input value={name} onChange={e => setName(e.target.value)} className={`${styles.input} shadow-sm`} type="text" name="" id="name" placeholder={"Escribe tu nombre"} />
+                        <input value={name} onChange={e => setName(e.target.value)} className={`${styles.input}`} type="text" name="" id="name" placeholder={"Escribe tu nombre"} />
                     </div>
                     <div className={"flex flex-col gap-1"}>
                         <label htmlFor="email">Tu email</label>
-                        <input value={email} onChange={e => setEmail(e.target.value)} className={`${styles.input} shadow-sm`} type="email" name="" id="email" placeholder={"Escribe tu email"} />
+                        <input value={email} onChange={e => setEmail(e.target.value)} className={`${styles.input}`} type="email" name="" id="email" placeholder={"Escribe tu email"} />
                     </div>
                     <div className={"flex flex-col gap-1 md:col-start-1 md:col-end-3"}>
                         <label>Mensaje</label>
-                        <textarea value={message} onChange={e => setMessage(e.target.value)} className={`${styles.input} shadow-sm resize-none`} rows={5} type="email" name="" placeholder={"Escribe un mensaje"} />
+                        <textarea value={message} onChange={e => setMessage(e.target.value)} className={`${styles.input} resize-none`} rows={5} type="email" name="" placeholder={"Escribe un mensaje"} />
                     </div>
                     <div className={""}>
                         <button className={"flex items-center justify-center gap-2 bg-[#323232] hover:bg-[#252525] transition-colors rounded-[.2rem] text-white py-2 w-full"} type={'submit'}>
                             <span>Enviar Mensaje</span>
-                            <i class="fa-regular fa-arrow-right-long text-lg"></i>
+                            <i className="fa-regular fa-arrow-right-long text-lg"></i>
                         </button>
                     </div>
                 </div>

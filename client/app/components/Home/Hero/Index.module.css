@@ -1,7 +1,7 @@
 .section {
     height: calc(100vh - 5rem);
-    padding-bottom: 5rem;
-    min-height: 650px;
+    padding: 1rem 0 3rem 0;
+    min-height: 550px;
 }
 
 .imageContainer {
@@ -19,7 +19,7 @@
 
 .background {
     position: relative;
-    height: calc(100vh - 5rem);
+    height: 100%;
 }
 
 .background::before {
@@ -47,9 +47,6 @@
         width: 100%;
         background-image: url('/hero/background-mobile.webp');
         opacity: .2;
-    }
-    .section {
-        min-height: 750px;
     }
 }
 

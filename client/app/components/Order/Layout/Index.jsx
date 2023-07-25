@@ -11,6 +11,7 @@ import useAppContext from "@/app/hooks/useAppContext";
 // Toast
 import { Toaster } from 'react-hot-toast';
 import { COUNTRIES } from "@/app/config/order/order";
+import WhatsAppButton from "../../WhatsAppButton/Index";
 
 export default function OrderLayout({ children, step, showSidebar }) {
     
@@ -42,16 +43,16 @@ export default function OrderLayout({ children, step, showSidebar }) {
                                     </Step>
                                     <Step title={"Pedido"}>
                                         {order?.items?.length != 0 && order?.items?.map(item => (
-                                            <div key={item.id} className={"grid grid-cols-2"}>
-                                                <Option label={"Tipo"} option={`${item.amount}x ${TYPE[item.type]}`} />
-                                                <Option label={"Peso"} option={`${item.weight ? `${item.weight}kg` : "-"}`} />
+                                            <div key={item.id} className={"grid grid-cols-2 py-2"}>
+                                                <Option label={"Tipo"} option={`1x ${TYPE[item.type]}`} />
+                                                {/* <Option label={"Peso"} option={`${item.weight ? `${item.weight}kg` : "-"}`} /> */}
                                             </div>
                                         ))}
                                         {order?.items?.length == 0 && (
                                             <div>Agrega elementos a tu pedido.</div>
                                         )}
                                     </Step>
-                                    <div>
+                                    {/* <div>
                                         <div className={"flex justify-between gap-2 pt-4"}>
                                             <div className={"text-lg font-semibold text-neutral-600 underline"}>Total</div>
                                             <div className={"text-xl font-semibold text-primary"}>{formatMoney(order.total)}</div>
@@ -59,7 +60,7 @@ export default function OrderLayout({ children, step, showSidebar }) {
                                         {order?.category == 'moving' && (
                                             <div className={"flex justify-end font-semibold text-neutral-600 uppercase text-sm"}>20% de descuento</div>
                                         )}
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
@@ -67,6 +68,7 @@ export default function OrderLayout({ children, step, showSidebar }) {
                 )}
             </div>
             <Toaster position={"top-right"} />
+            <WhatsAppButton />
         </main>
     )
 }
@@ -75,7 +77,7 @@ function Step({ children, title }) {
     return (
         <div className={"flex flex-col gap-2 py-4"}>
             <div className={"text-lg font-semibold text-neutral-600 underline"}>{title}</div>
-            <div className={`flex flex-col gap-y-2 text-neutral-500`}>
+            <div className={`flex flex-col text-neutral-500 divide-y`}>
                 {children}
             </div>
         </div>

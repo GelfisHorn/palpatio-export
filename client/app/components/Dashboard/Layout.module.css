@@ -1,0 +1,9 @@
+.children {
+    width: calc(100vw - 18rem);
+}
+
+@media (max-width: 1024px) {
+    .children {
+        width: calc(100vw - 4rem);
+    }
+}

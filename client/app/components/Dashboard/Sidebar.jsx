@@ -28,9 +28,10 @@ export function DashboardSidebar({ tab }) {
             </div>
             <div className={"flex flex-col justify-between h-full"}>
                 <div className={"flex flex-col gap-2 lg:gap-5"}>
-                    <ItemsContainer title={"Ordenes"} permissions={[PERMISSIONS.admin]}>
+                    <ItemsContainer title={"Ordenes"} permissions={[PERMISSIONS.admin, PERMISSIONS.client]}>
                         <Item permissions={[PERMISSIONS.admin]} href={"/dashboard/orders"} icon="fa-regular fa-clipboard-list" active={tab == "orders" ? true : false}>Ordenes</Item>
                         <Item permissions={[PERMISSIONS.admin]} href={"/dashboard/boxes"} icon="fa-regular fa-box" active={tab == "boxes" ? true : false}>Cajas</Item>
+                        <Item permissions={[PERMISSIONS.client]} href={"/dashboard/myorders"} icon="fa-regular fa-box" active={tab == "myorders" ? true : false}>Mis ordenes</Item>
                     </ItemsContainer>
                     <ItemsContainer title={"Clientes"} permissions={[PERMISSIONS.admin]}>
                         <Item permissions={[PERMISSIONS.admin]} href={"/dashboard/clients"} icon="fa-solid fa-users" active={tab == "clients" ? true : false}>Clientes</Item>

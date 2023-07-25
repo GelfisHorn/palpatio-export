@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ContactButton from "./ContactButton";
 
 export default function Navbar({ styles }) {
     return (
@@ -19,7 +20,8 @@ export default function Navbar({ styles }) {
             <div>
                 <div className={"hidden sm:flex items-center gap-5 text-lg"}>
                     <Link href={"/login"}>Iniciar sesión</Link>
-                    <Link href={"/register"} className={"py-2 px-4 rounded-md bg-primary hover:bg-cyan-800 transition-colors text-white"}>Crear cuenta</Link>
+                    {/* <Link href={"/register"} className={"py-2 px-4 rounded-md bg-primary hover:bg-cyan-800 transition-colors text-white"}>Crear cuenta</Link> */}
+                    <ContactButton />
                 </div>
                 <button className={"block sm:hidden"}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">

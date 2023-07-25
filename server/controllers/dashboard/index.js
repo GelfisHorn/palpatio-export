@@ -5,7 +5,8 @@ const dashboard = {
     clients: {
         getById: clients.getById,
         getAll: clients.getAll,
-        create: clients.create
+        create: clients.create,
+        assignOrder: clients.assignOrder
     },
     client: {
         getOrders: client.getOrders

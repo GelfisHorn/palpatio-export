@@ -11,6 +11,7 @@ import useAppContext from "@/app/hooks/useAppContext";
 // Toast
 import { Toaster } from 'react-hot-toast';
 import { COUNTRIES } from "@/app/config/order/order";
+import WhatsAppButton from "../../WhatsAppButton/Index";
 
 export default function OrderLayout({ children, step, showSidebar }) {
     
@@ -67,6 +68,7 @@ export default function OrderLayout({ children, step, showSidebar }) {
                 )}
             </div>
             <Toaster position={"top-right"} />
+            <WhatsAppButton />
         </main>
     )
 }

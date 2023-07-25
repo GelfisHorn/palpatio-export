@@ -46,7 +46,7 @@ export default function DashboardMyAccount() {
 
     return (
         <DashboardLayout tab={"myaccount"}>
-            <div className={"flex flex-col h-full bg-neutral-100"}>
+            <div className={"flex flex-col h-full bg-neutral-50"}>
                 <div className={"flex flex-col gap-6 pt-6 sm:pt-8"}>
                     <h2 className={"font-bold text-3xl mx-3 sm:mx-8 text-center sm:text-left"}>Ajustes de cuenta</h2>
                     <div className={"flex justify-center sm:justify-start gap-2 border-b px-3 sm:px-8"}>

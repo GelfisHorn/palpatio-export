@@ -1,9 +1,15 @@
 import mongoose from "mongoose"
+// Models
 import User from "../models/User.js"
+import Order from "../models/Order.js"
+import ClientOrder from '../models/ClientOrder.js'
+// Helpers
 import createToken from "../helpers/createToken.js"
 import createJWT from '../helpers/createJWT.js'
+// Hooks
 import sendRegisterMail from "../hooks/confirm/sendMail.js"
 import sendResetPassMail from "../hooks/resetPassword/sendMail.js"
+// Locales
 import locales from '../locales/controllers/user.js'
 
 const ObjectId = mongoose.Types.ObjectId;
@@ -27,7 +33,15 @@ const register = async (req, res) => {
         const token = createToken();
         user.token = token;
         await user.save();
-        // TODO: Verificar si hay ordenes con el email del usuario y asignarlas al mismo.
+
+        const orders = await Order.find({ "contact.email": email });
+        if(orders.length != 0) {
+            for(let i = 0; i < orders.length; i++) {
+                const newClientOrder = new ClientOrder({ client: user._id, order: orders[i]._id });
+                newClientOrder.save();
+            }
+        }
+
         sendRegisterMail({ email, token })
         res.status(200).json({ success: true });
     } catch (err) {
@@ -199,7 +213,6 @@ const disable = async (req, res) => {
                 await user.save()
                 return res.json({ success: true })
             } catch (error) {
-                console.log(error)
                 return res.json({ success: false })
             }
         }

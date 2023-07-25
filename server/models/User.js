@@ -32,8 +32,8 @@ const userSchema = mongoose.Schema({
     },
     permissions: {
         type: String,
-        enum: Object.values(PERMISSIONS).concat(["unset"]),
-        default: "unset"
+        enum: Object.values(PERMISSIONS),
+        default: PERMISSIONS.client
     },
     confirmed: {
         type: Boolean,

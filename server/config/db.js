@@ -9,7 +9,6 @@ const connectDB = async () => {
         const url = `${connection.connection.host}:${connection.connection.port}`
         console.log(`Connection established: ${url}`)
     } catch (error) {
-        console.log(error)
         process.exit(1)
     }
 }

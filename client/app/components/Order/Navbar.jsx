@@ -3,6 +3,8 @@
 import { useState } from "react";
 // Nextjs
 import Link from "next/link";
+// Components
+import ContactButton from "../ContactButton";
 // Animations
 import { AnimatePresence, motion } from "framer-motion";
 // Styles
@@ -56,12 +58,10 @@ export default function OrderNavbar({ step }) {
                 <div className={"text-lg font-medium"}>Paso <span className={""}>{step}</span></div>
             </div>
             <div className={"flex items-center divide-x"}>
-                <div className={"pr-3"}>
-                    <Link href={"tel:+49 1522 343333"} className={"text-base hover:text-primary transition-colors"}>+49 1522 343333</Link>
-                </div>
-                <div className={"hidden md:block pl-3"}>
+                <div className={"hidden md:block pr-3"}>
                     <Link href={"/login"} className={"text-base 2xl:text-lg hover:text-primary transition-colors"}>Iniciar sesión</Link>
                 </div>
+                <ContactButton />
                 <div className={"block md:hidden pl-3"}>
                     <div onClick={handleShowMenu} className={"text-2xl hover:text-primary cursor-pointer transition-colors"}>
                         <i className="fa-regular fa-bars"></i>

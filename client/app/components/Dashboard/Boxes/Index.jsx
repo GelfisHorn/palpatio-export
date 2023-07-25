@@ -195,7 +195,7 @@ function Order({ id, fullName, email, phoneNumber, amount, status, createdAt, up
                         <div className={"font-medium break-all"}>{phoneNumber}</div>
                     </a>
                     <div className={"flex items-center gap-2"}>
-                        <div className={"text-neutral-400"}><i class="fa-solid fa-box"></i></div>
+                        <div className={"text-neutral-400"}><i className="fa-solid fa-box"></i></div>
                         <div className={"font-medium text-neutral-700 break-all"}>{amount}</div>
                     </div>
                 </div>

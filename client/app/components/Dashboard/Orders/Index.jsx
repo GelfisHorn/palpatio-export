@@ -171,6 +171,12 @@ function Tab({ active, icon, color, title, count, handleClick }) {
 
 function Order({ id, country, name, email, phoneNumber, status, createdAt, updatedAt }) {
 
+    const handleCopyToClipboard = (id) => {
+        navigator.clipboard.writeText(id).then(() => {
+            toast.success("Copiaste el ID");
+        });
+    }
+
     return (
         <motion.a
             className={`px-4 md:px-8 py-4 md:py-6 border ${STATUS[status].color.border} rounded-xl transition-colors select-none`}
@@ -180,7 +186,7 @@ function Order({ id, country, name, email, phoneNumber, status, createdAt, updat
         >
             <div className={"flex flex-col gap-4 border-b pb-4"}>
                 <div className={"flex flex-col-reverse lg:flex-row lg:items-center gap-1 lg:gap-3"}>
-                    <div className={"hidden lg:block text-lg text-neutral-600 font-medium"}>{`#${id}`}</div>
+                    <a href={"#"} onClick={() => handleCopyToClipboard(id)} className={"hidden lg:block text-lg text-neutral-600 hover:text-primary transition-colors font-medium"}>{`#${id}`}</a>
                     <div className={"flex items-center gap-1 px-2 border rounded-md w-fit"}>
                         <i className={`${STATUS[status].icon} ${STATUS[status].color.text}`}></i>
                         <div>{STATUS[status].text}</div>

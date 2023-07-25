@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-    const { page, config } = req.body;
+    const { user, config } = req.body;
 
     if (req.method != 'POST') {
         res.status(405).json({ msg: `${req.method} method not allowed` });
@@ -9,11 +9,12 @@ export default async function handler(req, res) {
 
     try {
         const { data } = await axios.request({
-            url: `${process.env.SERVER_URI}/dashboard/clients?page=${page}`,
-            method: "GET",
+            url: `${process.env.SERVER_URI}/dashboard/clients`,
+            method: "POST",
             headers: {
                 'Authorization': config.headers.Authorization
-            }
+            },
+            data: user
         });
 
         res.status(200).json(data);

@@ -4,10 +4,11 @@ const clientOrderSchema = mongoose.Schema({
     client: {
         required: true,
         type: mongoose.SchemaTypes.ObjectId,
-        ref: 'User',
+        ref: 'User'
     },
     order: {
         required: true,
+        unique: true,
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Order',
     }

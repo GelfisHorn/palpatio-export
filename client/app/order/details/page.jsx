@@ -262,7 +262,7 @@ function Item({ item, items, checkFields }) {
         "package": [
             {
                 "id": "small",
-                "name": "Chico"
+                "name": "Pequeño"
             },
             {
                 "id": "medium",

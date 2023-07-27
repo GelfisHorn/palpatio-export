@@ -129,7 +129,8 @@ export default function DashboardMyOrders() {
 
 function Order({ order }) {
 
-    const { _id: id, fromCountry: country, contact, status, createdAt } = order.order;
+    const { _id: id, fromCountry: country, shipping, status, createdAt } = order.order;
+    console.log(order)
 
     return (
         <motion.div
@@ -152,15 +153,15 @@ function Order({ order }) {
                     </div>
                     <div className={"flex items-center gap-2"}>
                         <div className={"text-neutral-400"}><i className="fa-solid fa-user"></i></div>
-                        <div className={"font-medium text-neutral-700 break-all"}>{contact.name} {contact.surname}</div>
+                        <div className={"font-medium text-neutral-700 break-all"}>{shipping.from.fullName}</div>
                     </div>
                     <div className={"flex items-center gap-2"}>
                         <div className={"text-neutral-400"}><i className="fa-solid fa-envelope"></i></div>
-                        <div className={"font-medium text-neutral-700 break-all"}>{contact.email}</div>
+                        <div className={"font-medium text-neutral-700 break-all"}>{shipping.from.email}</div>
                     </div>
                     <div className={"flex items-center gap-2"}>
                         <div className={"text-neutral-400"}><i className="fa-solid fa-phone"></i></div>
-                        <div className={"font-medium text-neutral-700 break-all"}>{contact.phoneNumber}</div>
+                        <div className={"font-medium text-neutral-700 break-all"}>{shipping.from.phoneNumber}</div>
                     </div>
                 </div>
             </div>

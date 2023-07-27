@@ -28,7 +28,6 @@ export default function OrderShipping() {
     }, [order, orderCompleted])
 
     const [ shipping, setShipping ] = useState(order.shipping);
-    const [ contact, setContact ] = useState(order.contact || { name: "", email: "", phoneNumber: "" });
     const [ checkFields, setCheckFields ] = useState(false);
 
     const handleVerifyNextStep = (e) => {
@@ -56,7 +55,7 @@ export default function OrderShipping() {
     }
 
     async function handleSubmitForm(shipping) {
-        const updatedOrder = { fromCountry: order.from, items: order.items, shipping, contact, total: order.total };
+        const updatedOrder = { fromCountry: order.from, items: order.items, shipping, total: order.total };
         
         try {
             await axios.post('/api/orders/create', updatedOrder);
@@ -167,7 +166,7 @@ export default function OrderShipping() {
                                     }} />
                                 </div>
                             </div>
-                            <div className={"flex flex-col gap-3 py-2 sm:py-5 px-2 sm:px-6 bg-white rounded-md shadow-md"}>
+                            {/* <div className={"flex flex-col gap-3 py-2 sm:py-5 px-2 sm:px-6 bg-white rounded-md shadow-md"}>
                                 <div className={"font-bold"}>Información de contacto</div>
                                 <div className={"flex flex-col gap-2"}>
                                     <Input id={"14"} label={"Nombre"} type={"text"} checkFields={checkFields} state={{
@@ -183,7 +182,7 @@ export default function OrderShipping() {
                                         set: (value) => setContact({ ...contact, phoneNumber: value })
                                     }} />
                                 </div>
-                            </div>
+                            </div> */}
                             <div className={"flex flex-col gap-3 py-2 sm:py-5 px-2 sm:px-6 bg-white rounded-md shadow-md"}>
                                 <div className={"font-bold"}>{"Agregar una nota (opcional)"}</div>
                                 <Textarea id={"17"} checkFields={checkFields} state={{

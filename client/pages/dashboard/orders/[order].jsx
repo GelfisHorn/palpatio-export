@@ -54,7 +54,7 @@ export default function DashboardOrder() {
     }
 
     return (
-        <Layout title={order._id ? `Orden de ${order.contact.name}` : "Cargando..."}>
+        <Layout title={order._id ? `Orden de ${order.shipping.from.fullName}` : "Cargando..."}>
             <ClientComponent order={order} setOrder={setOrder} loading={loading} />
         </Layout>
     )

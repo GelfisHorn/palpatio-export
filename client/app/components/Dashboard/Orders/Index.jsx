@@ -77,11 +77,14 @@ export default function DashboardOrders() {
 
         try {
             const { data } = await axios.post('/api/orders/getAll', { config });
-            setOrders(data);
             handleSetTabsCount(data);
+            setOrders(data);
             // Filter orders by status
             const filtered = data.filter(order => order.status == status);
-            setFilteredOrders(filtered);
+            const sortedByDate = filtered.sort(function (a, b) {
+                return new Date(b.updatedAt) - new Date(a.updatedAt);
+            });
+            setFilteredOrders(sortedByDate);
         } catch (error) {
             toast.error("Hubo un error al obtener las ordenes");
         } finally {
@@ -91,7 +94,10 @@ export default function DashboardOrders() {
 
     function filterOrdersBy(status) {
         const filtered = orders.filter(order => order.status == status);
-        setFilteredOrders(filtered);
+        const sortedByDate = filtered.sort(function (a, b) {
+            return new Date(b.updatedAt) - new Date(a.updatedAt);
+        });
+        setFilteredOrders(sortedByDate);
     }
 
     function handleSetStatus(status) {
@@ -136,9 +142,9 @@ export default function DashboardOrders() {
                                     key={order._id}
                                     id={order._id}
                                     country={order.fromCountry}
-                                    name={order.contact.name}
-                                    email={order.contact.email}
-                                    phoneNumber={order.contact.phoneNumber}
+                                    name={order.shipping.from.fullName}
+                                    email={order.shipping.from.email}
+                                    phoneNumber={order.shipping.from.phoneNumber}
                                     status={order.status}
                                     createdAt={order.createdAt}
                                     updatedAt={order.updatedAt}

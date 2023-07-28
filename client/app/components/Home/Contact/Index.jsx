@@ -30,10 +30,17 @@ export default function Contact() {
 
         try {
             await axios.post('/api/contact/sendMail', { name, email, message });
+            resetForm();
             toast.success(locales[lang].notifications.success);
         } catch (error) {
             toast.error(locales[lang].notifications.error.catch);
         }
+    }
+
+    const resetForm = () => {
+        setName("");
+        setEmail("");
+        setMessage("");
     }
 
     return (

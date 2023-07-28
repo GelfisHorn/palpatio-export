@@ -37,8 +37,14 @@ export default function Boxes() {
                 <div className={"grid grid-cols-1 xl:grid-cols-2 items-center justify-center gap-16 w-full 2xl:w-2/3"}>
                     <div className={"flex justify-center"}>
                         <div className={"w-full sm:w-2/3 lg:w-1/2 xl:w-full"}>
-                            <div className={"image-container"}>
-                                <Image className={"image rounded-xl"} src={"/Boxes/box.webp"} fill alt={"Box image"} />
+                            <div className={"flex flex-col gap-2"}>
+                                <div className={"image-container"}>
+                                    <Image className={"image rounded-xl"} src={"/Boxes/box.webp"} fill alt={"Box image"} />
+                                </div>
+                                <div className={"flex items-center justify-center gap-2"}>
+                                    <i className="fa-solid fa-circle-info text-xl"></i>
+                                    <div className={"font-medium"}>{`${locales[lang].height}: 110cm, ${locales[lang].width}: 50cm, ${locales[lang].depth}: 50cm`}</div>
+                                </div>
                             </div>
                         </div>
                     </div>

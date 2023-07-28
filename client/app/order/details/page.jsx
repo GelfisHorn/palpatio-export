@@ -16,16 +16,18 @@ import uploadImages from "@/app/hooks/uploadImages";
 import randomId from "../../helpers/randomId";
 // Toast
 import toast from 'react-hot-toast';
-import { formatMoney } from "../../helpers/formatMoney";
-// Languages
-import lang from '../../langs/order/page.json';
+// Locales
+import locales from '../../langs/order/details/Page';
+import itemLocales from '../../langs/order/Page';
 // HeadlessUI
 import { Dialog, Transition } from '@headlessui/react'
 // Settings
-import { PRICE, UNITS_MAX, MAX_AMOUNT, VEHICLES, COUNTRIES, DISCOUNT, PRICE_DEFAULT, VEHICLE_PRICE } from "@/app/config/order/order";
+import { COUNTRIES, DISCOUNT } from "@/app/config/order/order";
 
 
 export default function OrderIndex() {
+
+    const { lang } = useAppContext();
     
     const router = useRouter();
 
@@ -69,17 +71,17 @@ export default function OrderIndex() {
         setCheckFields(false);
         setCheckFields(true);
         if(!order.from) {
-            toast.error("Debes seleccionar un país");
+            toast.error(locales[lang].notifications.order.error.country);
             return;
         }
         if(order.items.length == 0) {
-            toast.error("Debes elegir qué vas a enviar");
+            toast.error(locales[lang].notifications.order.error.items.default);
             return;
         }
         // Check fields ready
         const fieldsReady = order.items.filter(item => item.ready == false);
         if(fieldsReady.length) {
-            toast.error("Debes llenar todos los campos");
+            toast.error(locales[lang].notifications.order.error.fields);
             return;
         }
         
@@ -102,23 +104,23 @@ export default function OrderIndex() {
                 <div className={"flex flex-col gap-8 w-full px-3 sm:px-8"}>
                     <div className={"flex flex-col gap-7"}>
                         <div className={"flex flex-col gap-4"}>
-                            <h2 className={"text-2xl font-bold uppercase"}>Datos iniciales</h2>
+                            <h2 className={"text-2xl font-bold uppercase"}>{locales[lang].title}</h2>
                             <div className={"flex flex-col gap-8"}>
                                 <div>
-                                    <div className={"text-lg font-semibold"}>Haz el proceso más fácil</div>
-                                    <p className={"text-neutral-600"}><Link className={"text-primary underline"} href={"#"}>Inicia sesión</Link> para facilitar el proceso la próxima vez que envíes algo.</p>
+                                    <div className={"text-lg font-semibold"}>{locales[lang].signIn.title}</div>
+                                    <p className={"text-neutral-600"}><Link className={"text-primary underline"} href={"#"}>{locales[lang].signIn.href}</Link> {locales[lang].signIn.text}</p>
                                 </div>
                                 <div className={"grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-10 p-5 bg-white rounded-md shadow-md"}>
                                     <div>
-                                        <div className={"text-neutral-600"}>Desde</div>
+                                        <div className={"text-neutral-600"}>{locales[lang].country.from.text}</div>
                                         <div className={"relative"}>
                                             <div onClick={() => setShowSelect(!showSelect)} className={`flex items-center justify-between cursor-pointer border-b-2 ${showSelect ? "border-primary" : "border-transparent"} ${order.from ? "text-neutral-800" : "text-neutral-500"} transition-colors select-none`}>
-                                                <div className={`font-semibold`}>{order.from ? COUNTRIES[order.from] : "Seleccionar país"}</div>
+                                                <div className={`font-semibold`}>{order.from ? COUNTRIES[lang][order.from] : locales[lang].country.from.default}</div>
                                                 <i className="fa-solid fa-angle-down"></i>
                                             </div>
                                             {showSelect && (
                                                 <div className={"absolute top-7 bg-white rounded-b-md shadow-md border overflow-hidden w-full border-t-transparent z-10"}>
-                                                    {Object.keys(COUNTRIES).map(country => (
+                                                    {Object.keys(COUNTRIES[lang]).map(country => (
                                                         <div key={country}
                                                             onClick={() => {
                                                                 setOrder(current => {
@@ -127,17 +129,17 @@ export default function OrderIndex() {
                                                                 setShowSelect(false);
                                                             }}
                                                             className={"p-4 w-full hover:bg-neutral-100 transition-colors cursor-pointer text-sm"}>
-                                                            {COUNTRIES[country]}</div>
+                                                            {COUNTRIES[lang][country]}</div>
                                                     ))}
                                                 </div>
                                             )}
                                         </div>
                                     </div>
                                     <div>
-                                        <div className={"text-neutral-600"}>Hacia</div>
+                                        <div className={"text-neutral-600"}>{locales[lang].country.to.text}</div>
                                         <div className={"relative"}>
                                             <div className={"flex items-center justify-between text-neutral-800"}>
-                                                <div className={"font-semibold"}>República Dominicana</div>
+                                                <div className={"font-semibold"}>{locales[lang].country.to.default}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -150,50 +152,50 @@ export default function OrderIndex() {
                             </div>
                         </div>
                         <div className={"flex flex-col gap-4"}>
-                            <div className={"text-2xl font-bold uppercase text-center"}>¿Quieres enviar algo más?</div>
+                            <div className={"text-2xl font-bold uppercase text-center"}>{locales[lang].sendSomethingElse.title}</div>
                             <div className={"grid grid-cols-2 gap-2"}>
                                 <AddItem
                                     type={"vehicle"}
                                     icon={"fa-solid fa-car"}
-                                    text={"Añadir vehiculo"}
+                                    text={locales[lang].sendSomethingElse.vehicle}
                                     items={{ state: items, setState: setItems }}
                                 />
                                 <AddItem
                                     type={"furniture"}
                                     icon={"fa-solid fa-loveseat"}
-                                    text={"Añadir mueble"}
+                                    text={locales[lang].sendSomethingElse.furniture}
                                     items={{ state: items, setState: setItems }}
                                 />
                                 <AddItem
                                     type={"package"}
                                     icon={"fa-solid fa-box"}
-                                    text={"Añadir paquete"}
+                                    text={locales[lang].sendSomethingElse.package}
                                     items={{ state: items, setState: setItems }}
                                 />
                                 <AddItem
                                     type={"pallet"}
                                     content={"pallet"}
                                     icon={"fa-solid fa-pallet-box"}
-                                    text={"Añadir pallet"}
+                                    text={locales[lang].sendSomethingElse.pallet}
                                     items={{ state: items, setState: setItems }}
                                 />
                                 <AddItem
                                     type={"tank"}
                                     icon={"fa-solid fa-tank-water"}
-                                    text={"Añadir tanque"}
+                                    text={locales[lang].sendSomethingElse.tank}
                                     items={{ state: items, setState: setItems }}
                                 />
                                 <AddItem
                                     type={"other"}
                                     icon={"fa-sharp fa-regular fa-square-dashed"}
-                                    text={"Añadir otro"}
+                                    text={locales[lang].sendSomethingElse.other}
                                     items={{ state: items, setState: setItems }}
                                 />
                             </div>
                         </div>
                     </div>
                     <button onClick={handleVerifyNextStep} className={"flex items-center gap-1 justify-center px-10 py-3 rounded-md bg-primary hover:bg-cyan-800 text-white"}>
-                        <span>Siguiente paso</span>
+                        <span>{locales[lang].next}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
                         </svg>
@@ -207,29 +209,31 @@ export default function OrderIndex() {
 
 function Item({ item, items, checkFields }) {
 
+    const { lang } = useAppContext();
+
     const type = {
         "vehicle": {
-            "title": "Vehiculo",
+            "title": itemLocales[lang].items[0].title,
             "icon": "fa-solid fa-car"
         },
         "furniture": {
-            "title": "Mueble",
+            "title": itemLocales[lang].items[1].title,
             "icon": "fa-solid fa-loveseat"
         },
         "package": {
-            "title": "Paquete",
+            "title": itemLocales[lang].items[2].title,
             "icon": "fa-solid fa-box"
         },
-        "pallet": {
-            "title": "Pallet",
-            "icon": "fa-solid fa-pallet-box"
-        },
         "tank": {
-            "title": "Tanque",
+            "title": itemLocales[lang].items[3].title,
             "icon": "fa-solid fa-tank-water"
         },
+        "pallet": {
+            "title": itemLocales[lang].items[4].title,
+            "icon": "fa-solid fa-pallet-box"
+        },
         "other": {
-            "title": "Otro",
+            "title": itemLocales[lang].items[6].title,
             "icon": "fa-sharp fa-regular fa-square-dashed"
         }
     }
@@ -238,76 +242,72 @@ function Item({ item, items, checkFields }) {
         "vehicle": [
             {
                 "id": "truck",
-                "name": "Camión"
+                "name": itemLocales[lang].items[0].categories[0]
             },
             {
                 "id": "car",
-                "name": "Auto"
+                "name": itemLocales[lang].items[0].categories[1]
             },
             {
                 "id": "engine",
-                "name": "Motor"
+                "name": itemLocales[lang].items[0].categories[2]
             }
         ],
         "furniture": [
             {
-                "id": "chair",
-                "name": "Silla"
+                "id": "table",
+                "name": itemLocales[lang].items[1].categories[0]
             },
             {
-                "id": "table",
-                "name": "Mesa"
-            }
+                "id": "armchair",
+                "name": itemLocales[lang].items[1].categories[1]
+            },
+            {
+                "id": "shelves",
+                "name": itemLocales[lang].items[1].categories[2]
+            },
+            {
+                "id": "chairs",
+                "name": itemLocales[lang].items[1].categories[3]
+            },
         ],
         "package": [
             {
                 "id": "small",
-                "name": "Pequeño"
+                "name": itemLocales[lang].items[7].categories[0]
             },
             {
                 "id": "medium",
-                "name": "Mediano"
+                "name": itemLocales[lang].items[7].categories[1]
             },
             {
                 "id": "big",
-                "name": "Grande"
+                "name": itemLocales[lang].items[7].categories[2]
             }
         ],
         "pallet": null,
         "tank": [
             {
-                "id": "water",
-                "name": "Agua"
-            },
-            {
-                "id": "fuel",
-                "name": "Combustible"
-            },
-            {
                 "id": "storage",
-                "name": "Almacenamiento"
-            },
-            {
-                "id": "gas",
-                "name": "Gas"
+                "name": itemLocales[lang].items[3].categories[0]
             }
         ],
         "other": [
             {
                 "id": "tools",
-                "name": "Herramientas"
+                "name": itemLocales[lang].items[6].categories[0]
             },
             {
                 "id": "gardening",
-                "name": "Jardinería"
+                "name": itemLocales[lang].items[6].categories[1]
             },
             {
                 "id": "travel",
-                "name": "Articulos de viaje"
+                "name": itemLocales[lang].items[6].categories[2]
             },
             {
                 "id": "electronics",
-                "name": "Electrónicos"
+                "name": itemLocales[lang].items[6].categories[3]
             }
         ]
     }
@@ -375,21 +375,21 @@ function Item({ item, items, checkFields }) {
                     <div className={"grid grid-cols-2 gap-3"}>
                         <div className={"flex flex-col gap-1"}>
                             <div className={"flex flex-col gap-2"}>
-                                <div className={"font-semibold text-lg"}>¿Tienes imágenes? <span className={"text-base font-normal text-neutral-600"}>(Opcional)</span></div>
+                                <div className={"font-semibold text-lg"}>{locales[lang].item.images} <span className={"text-base font-normal text-neutral-600"}>({locales[lang].item.optional})</span></div>
                                 <label className={"flex items-center justify-center gap-3 w-full bg-neutral-800 hover:bg-black transition-colors text-white py-3 rounded-full cursor-pointer"} htmlFor={`file${item.id}`}>
                                     <i className="fa-light fa-upload text-lg"></i>
-                                    <span>Adjuntar imágen</span>
+                                    <span>{locales[lang].item.imagesBtn}</span>
                                 </label>
                                 <input onChange={e => setImagesInput(e.target.files)} multiple={true} className={"hidden"} type="file" name="" id={`file${item.id}`} />
                             </div>
                             {imagesInput.length ? (
-                                <div className={"text-center font-medium text-neutral-600"}>{imagesInput.length} {imagesInput.length == 1 ? "imágen adjunta" : "imágenes adjuntas"}</div>
+                                <div className={"text-center font-medium text-neutral-600"}>{imagesInput.length} {imagesInput.length == 1 ? locales[lang].item.attachedImage.singular : locales[lang].item.attachedImage.plural}</div>
                             ) : null}
                         </div>
                     </div>
                     {BUTTONS[item.type] && (
                         <div className={"flex flex-col gap-2"}>
-                            <div className={"font-semibold text-lg"}>¿Qué vas a enviar? <span className={"text-base font-normal text-neutral-600"}>(Opcional)</span></div>
+                            <div className={"font-semibold text-lg"}>{locales[lang].item.whatYouWillSend} <span className={"text-base font-normal text-neutral-600"}>({locales[lang].item.optional})</span></div>
                             <div className={"grid grid-cols-2 gap-3"}>
                                 {BUTTONS[item.type].map(btn => (
                                     <button key={btn.id} className={`border-[0.125rem] border-primary text-primary hover:bg-primary hover:text-white transition-colors py-[0.625rem] rounded-full font-semibold ${btn.id == content ? "text-white bg-primary" : null}`} onClick={() => handleSetContent(btn.id)}>

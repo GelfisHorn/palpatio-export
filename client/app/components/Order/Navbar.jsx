@@ -9,8 +9,14 @@ import ContactButton from "../ContactButton";
 import { AnimatePresence, motion } from "framer-motion";
 // Styles
 import styles from './Navbar.module.css'
+// Hooks
+import useAppContext from '@/app/hooks/useAppContext'
+// Locales
+import locales from '@/app/langs/components/order/navbar';
 
 export default function OrderNavbar({ step }) {
+
+    const { lang } = useAppContext();
 
     const [ showMenu, setShowMenu ] = useState(false);
 
@@ -33,7 +39,7 @@ export default function OrderNavbar({ step }) {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     )}
-                    <span>Qué enviar</span>
+                    <span>{locales[lang].whatSend}</span>
                 </div>
                 <Arrow />
                 <div className={`flex items-center gap-1 ${step == 2 ? "text-neutral-900 underline" : step > 2 ? "text-primary" : "text-neutral-400"} font-medium`}>
@@ -42,7 +48,7 @@ export default function OrderNavbar({ step }) {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     )}
-                    <span>Detalles del pedido</span>
+                    <span>{locales[lang].orderDetails}</span>
                 </div>
                 <Arrow />
                 <div className={`flex items-center gap-1 ${step == 3 ? "text-neutral-900 underline" : step > 3 ? "text-primary" : "text-neutral-400"} font-medium`}>
@@ -51,15 +57,15 @@ export default function OrderNavbar({ step }) {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     )}
-                    <span>Detalles de envío</span>
+                    <span>{locales[lang].shippingDetails}</span>
                 </div>
             </div>
             <div className={"block md:hidden"}>
-                <div className={"text-lg font-medium"}>Paso <span className={""}>{step}</span></div>
+                <div className={"text-lg font-medium"}>{locales[lang].step} <span className={""}>{step}</span></div>
             </div>
             <div className={"flex items-center"}>
                 <div className={"hidden md:block pr-3"}>
-                    <Link href={"/login"} className={"text-base 2xl:text-lg hover:text-primary transition-colors"}>Iniciar sesión</Link>
+                    <Link href={"/login"} className={"text-base 2xl:text-lg hover:text-primary transition-colors"}>{locales[lang].logIn}</Link>
                 </div>
                 <div className={"hidden sm:block"}>
                     <ContactButton />
@@ -91,6 +97,9 @@ function Arrow() {
 }
 
 function NavbarMenu({ handleClose }) {
+
+    const { lang } = useAppContext();
+    
     return (
         <>
             <div onClick={handleClose} className={`${styles.menuBackground}`}>
@@ -106,8 +115,8 @@ function NavbarMenu({ handleClose }) {
                     <button onClick={handleClose} className={"text-2xl hover:text-primary transition-colors"}><i className="fa-regular fa-xmark"></i></button>
                 </div>
                 <div className={"flex flex-col items-center gap-4 pb-8 text-base"}>
-                    <Link href={"/login"} className={"hover:text-primary transition-colors font-medium"}>Iniciar sesión</Link>
-                    <Link href={"/register"} className={"py-2 px-6 bg-primary hover:bg-[#148bac] transition-colors rounded-md text-white"}>Crear cuenta</Link>
+                    <Link href={"/login"} className={"hover:text-primary transition-colors font-medium"}>{locales[lang].logIn}</Link>
+                    <Link href={"/register"} className={"py-2 px-6 bg-primary hover:bg-[#148bac] transition-colors rounded-md text-white"}>{locales[lang].signUp}</Link>
                 </div>
             </motion.div>
         </>

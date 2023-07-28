@@ -5,7 +5,7 @@ const AppContext = createContext();
 export function AppContextProvider({ children }) {
 
     // Language
-    const [ lang, setLang ] = useState(localStorage.getItem('lang') || 'es');
+    const [ lang, setLang ] = useState('es');
     const handleSetLang = (newLang) => {
         if(newLang == lang) {
             return;
@@ -18,6 +18,13 @@ export function AppContextProvider({ children }) {
     const [ auth, setAuth ] = useState({});
 
     useEffect(() => {
+        if(localStorage != undefined) {
+            const lang = localStorage.getItem('lang');
+            if(!lang) {
+                return;
+            }
+            setLang(lang);
+        }
         // Get auth
         if(Object.keys(auth).length != 0) {
             return;

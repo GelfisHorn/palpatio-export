@@ -99,8 +99,8 @@ function LangDropdown() {
                         exit={{ opacity: 0 }}
                         className={`absolute divide-y border rounded-b-md overflow-hidden`}
                     >
-                        {Object.values(LANGS).map(lang => (
-                            <button onClick={() => handleSetNewLang(lang.key)} className={"bg-neutral-100 hover:bg-white px-5 py-1 w-full transition-colors"}>{lang.name}</button>
+                        {Object.values(LANGS).map((lang, index) => (
+                            <button key={index} onClick={() => handleSetNewLang(lang.key)} className={"bg-neutral-100 hover:bg-white px-5 py-1 w-full transition-colors"}>{lang.name}</button>
                         ))}
                     </motion.div>
                 )}

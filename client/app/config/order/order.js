@@ -31,13 +31,42 @@ const VEHICLES = { // (Select on vehicle item)
     "bike": "Bicicleta"
 }
 const COUNTRIES = { // Country select
-    "CH": "Suiza",
-    "FR": "Francia",
-    "AT": "Austria",
-    "BE": "Belgica",
-    "NL": "Holanda",
-    "LU": "Luxemburgo",
-    "DE": "Alemania"
+    fr: {
+        "CH": "Suisse",
+        "FR": "France",
+        "AT": "L'Autriche",
+        "BE": "Belgique",
+        "NL": "Hollande",
+        "LU": "Luxembourg",
+        "DE": "Allemagne"
+    },
+    de: {
+        "CH": "Schweizerisch",
+        "FR": "Frankreich",
+        "AT": "Österreich",
+        "BE": "Belgien",
+        "NL": "Holland",
+        "LU": "Luxemburg",
+        "DE": "Deutschland"
+    },
+    en: {
+        "CH": "Swiss",
+        "FR": "France",
+        "AT": "Austria",
+        "BE": "Belgium",
+        "NL": "Holland",
+        "LU": "Luxembourg",
+        "DE": "Germany"
+    },
+    es: {
+        "CH": "Suiza",
+        "FR": "Francia",
+        "AT": "Austria",
+        "BE": "Belgica",
+        "NL": "Holanda",
+        "LU": "Luxemburgo",
+        "DE": "Alemania"
+    }
 }
 const DISCOUNT = 20; // Discount on "moving" category
 // Price Settings

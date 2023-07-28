@@ -12,12 +12,25 @@ import useAppContext from "../hooks/useAppContext";
 import { motion, AnimatePresence } from "framer-motion";
 // Locales
 import locales from "../langs/components/layout";
+import mobileNavLocales from '@/app/langs/components/order/navbar';
+// Styles
+import styles from '@/app/components/Order/Navbar.module.css'
 
 export default function Navbar({ styles }) {
 
     const { lang } = useAppContext();
 
     const [ showMenu, setShowMenu ] = useState(false);
+
+    const handleShowMenu = () => {
+        document.body.style.overflow = 'hidden';
+        setShowMenu(true)
+    }
+
+    const handleCloseMenu = () => {
+        document.body.style.overflow = 'auto';
+        setShowMenu(false)
+    }
 
     return (
         <div className={`relative flex items-center justify-between px-6 sm:px-20 2xl:px-28 h-20 ${styles || ""} z-10 text-lg 2xl:text-xl`}>
@@ -44,13 +57,48 @@ export default function Navbar({ styles }) {
                 <div className={"block sm:hidden"}>
                     <ContactButton mobileMode={true} />
                 </div>
-                <button className={"block sm:hidden"}>
+                <button className={"block sm:hidden"} onClick={handleShowMenu}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
                 </button>
             </div>
+            <AnimatePresence>
+                {showMenu && (
+                    <NavbarMenu handleClose={handleCloseMenu} />
+                )}
+            </AnimatePresence>
         </div>
+    )
+}
+
+function NavbarMenu({ handleClose }) {
+
+    const { lang } = useAppContext();
+
+    return (
+        <>
+            <div onClick={handleClose} className={`${styles.menuBackground}`}>
+            </div>
+            <motion.div
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 500 }}
+                className={`${styles.menu} rounded-l-md`}
+            >
+                <div className={"flex items-center justify-between py-5 px-6"}>
+                    <div className={"text-xl font-semibold"}>Pal Patio Export</div>
+                    <button onClick={handleClose} className={"text-2xl hover:text-primary transition-colors"}><i className="fa-regular fa-xmark"></i></button>
+                </div>
+                <div className={"flex flex-col items-center gap-10"}>
+                    <LangDropdown />
+                    <div className={"flex flex-col items-center gap-4 pb-8 text-base"}>
+                        <Link href={"/login"} className={"hover:text-primary transition-colors font-medium"}>{mobileNavLocales[lang].logIn}</Link>
+                        <Link href={"/register"} className={"py-2 px-6 bg-primary hover:bg-[#148bac] transition-colors rounded-md text-white"}>{mobileNavLocales[lang].signUp}</Link>
+                    </div>
+                </div>
+            </motion.div>
+        </>
     )
 }
 

@@ -5,7 +5,7 @@ import styles from './Index.module.css'
 // Hooks
 import useAppContext from '@/app/hooks/useAppContext'
 // Locales
-import locales from '@/app/langs/components/home/aboutus';
+import locales from '@/app/langs/components/home/aboutUs';
 
 export default function AboutUs() {
 

@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 // React
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 // Nextjs
 import Image from 'next/image'
 // Animations
@@ -11,10 +11,16 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { toast } from 'react-hot-toast'
 // Styles
 import styles from './Index.module.css'
+// Hooks
+import useAppContext from '@/app/hooks/useAppContext'
+// Locales
+import locales from '@/app/langs/components/home/boxes';
 
 const MAX_BOXES_AMOUNT = 10;
 
 export default function Boxes() {
+
+    const { lang } = useAppContext();
 
     const [ showModal, setShowModal ] = useState(false);
     const handleShowModal = () => {
@@ -25,8 +31,8 @@ export default function Boxes() {
         <div className={`${styles.container} py-20 px-6 sm:px-20`}>
             <div className={"flex flex-col justify-center items-center gap-16 h-full"}>
                 <div className={"flex flex-col gap-2 text-center"}>
-                    <div className={"uppercase font-bold sm:text-lg text-primary"}>Nuestras cajas</div>
-                    <h2 className={"text-2xl sm:text-4xl font-bold"}>Nuestras cajas resistentes</h2>
+                    <div className={"uppercase font-bold sm:text-lg text-primary"}>{locales[lang].subtitle}</div>
+                    <h2 className={"text-2xl sm:text-4xl font-bold"}>{locales[lang].title}</h2>
                 </div>
                 <div className={"grid grid-cols-1 xl:grid-cols-2 items-center justify-center gap-16 w-full 2xl:w-2/3"}>
                     <div className={"flex justify-center"}>
@@ -38,12 +44,12 @@ export default function Boxes() {
                     </div>
                     <div className={"flex flex-col items-center justify-center gap-10"}>
                         <div className={"flex flex-col gap-6 items-center"}>
-                            <h3 className={"text-2xl sm:text-3xl font-semibold text-center"}>Envía tus articulos de forma segura</h3>
-                            <div className={"text-center sm:text-lg"}>Nuestras increíbles cajas están especialmente diseñadas para el transporte y protección de tus envíos. Sabemos lo importante que es para ti garantizar que tus objetos lleguen intactos a su destino, y es por eso que te ofrecemos estas cajas de alta calidad y resistencia.</div>
+                            <h3 className={"text-2xl sm:text-3xl font-semibold text-center"}>{locales[lang].article.title}</h3>
+                            <div className={"text-center sm:text-lg"}>{locales[lang].article.description}</div>
                         </div>
                         <button onClick={handleShowModal} className={"flex items-center gap-3 w-fit font-semibold border-2 border-primary hover:bg-primary text-primary hover:text-white transition-colors px-8 py-3 rounded-lg"}>
                             <i className="fa-solid fa-box text-xl sm:text-2xl"></i>
-                            <span className={"sm:text-lg uppercase"}>Comprar caja</span>
+                            <span className={"sm:text-lg uppercase"}>{locales[lang].article.button}</span>
                         </button>
                     </div>
                 </div>

@@ -1,11 +1,21 @@
+"use client"
+
+// Nextjs
 import Link from "next/link";
+// Hooks
+import useAppContext from '@/app/hooks/useAppContext'
+// Locales
+import locales from '@/app/langs/footer';
 
 export default function Footer() {
+
+    const { lang } = useAppContext();
+
     return (
         <div className={"flex items-center justify-center border-t h-20"} id={"contact"}>
             <div className={"flex items-center justify-center gap-4"}>
-                <NavLink href={"#"} text={"Datenschutz"} />
-                <NavLink href={"#"} text={"Impressum"} />
+                <NavLink href={"#"} text={locales[lang].datenschutz} />
+                <NavLink href={"#"} text={locales[lang].impressum} />
             </div>
         </div>
     )

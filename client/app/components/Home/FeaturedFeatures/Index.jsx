@@ -1,37 +1,45 @@
+"use client"
 
 // Nextjs
 import Link from 'next/link'
 // Styles
 import styles from './Index.module.css'
+// Hooks
+import useAppContext from '@/app/hooks/useAppContext'
+// Locales
+import locales from '@/app/langs/components/home/featuredFeatures';
 
 export default function FeaturedFeatures() {
+
+    const { lang } = useAppContext();
+ 
     return (
         <div className={`${styles.container} py-20 px-6 sm:px-20`}>
             <div className={"flex flex-col justify-center gap-16 h-full"}>
                 <div className={"flex flex-col gap-2 text-center"}>
-                    <div className={"uppercase font-bold sm:text-lg text-primary"}>Caracteristicas Destacadas</div>
-                    <h2 className={"text-2xl sm:text-4xl font-bold"}>Nuestros servicios destacados</h2>
+                    <div className={"uppercase font-bold sm:text-lg text-primary"}>{locales[lang].subtitle}</div>
+                    <h2 className={"text-2xl sm:text-4xl font-bold"}>{locales[lang].title}</h2>
                 </div>
                 <div className={"grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-4"}>
                     <Card
                         icon={"fa-regular fa-hand-holding-dollar"}
-                        title={"Calidad y ahorro en cada envío"}
-                        description={"Ofrecemos precios competitivos y transparentes para adaptarnos a tu presupuesto. No tienes que comprometer la calidad por el precio. Envía con nosotros y obtén la mejor relación calidad-precio en cada envío."}
+                        title={locales[lang].items[0].title}
+                        description={locales[lang].items[0].description}
                     />
                     <Card
                         icon={"fa-solid fa-user-headset"}
-                        title={"Soporte al cliente excepcional"}
-                        description={"Nuestro equipo de atención al cliente está disponible para resolver cualquier consulta o problema que puedas tener. Ya sea por teléfono, correo electrónico o chat en línea, nuestro amable personal está listo para brindarte la asistencia que necesites."}
+                        title={locales[lang].items[1].title}
+                        description={locales[lang].items[1].description}
                     />
                     <Card
                         icon={"fa-solid fa-box-circle-check"}
-                        title={"Envío seguro"}
-                        description={"Tu tranquilidad es nuestra prioridad. Ofrecemos un seguro de envío completo que cubre cualquier pérdida, robo o daño que pueda ocurrir durante el transporte. Envía con confianza sabiendo que tus paquetes están protegidos."}
+                        title={locales[lang].items[2].title}
+                        description={locales[lang].items[2].description}
                     />
                     <Card
                         icon={"fa-solid fa-ship"}
-                        title={"Envios mensuales"}
-                        description={"Realizamos envíos mensuales para satisfacer tus necesidades de entrega recurrente. Con nuestros envíos mensuales, puedes establecer un calendario predefinido para la entrega de tus paquetes, lo que te brinda mayor control y planificación."}
+                        title={locales[lang].items[3].title}
+                        description={locales[lang].items[3].description}
                     />
                 </div>
                 {/* <div className={"flex justify-center"}>

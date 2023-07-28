@@ -57,11 +57,16 @@ export default function OrderNavbar({ step }) {
             <div className={"block md:hidden"}>
                 <div className={"text-lg font-medium"}>Paso <span className={""}>{step}</span></div>
             </div>
-            <div className={"flex items-center divide-x"}>
+            <div className={"flex items-center"}>
                 <div className={"hidden md:block pr-3"}>
                     <Link href={"/login"} className={"text-base 2xl:text-lg hover:text-primary transition-colors"}>Iniciar sesión</Link>
                 </div>
-                <ContactButton />
+                <div className={"hidden sm:block"}>
+                    <ContactButton />
+                </div>
+                <div className={"block sm:hidden"}>
+                    <ContactButton mobileMode={true} />
+                </div>
                 <div className={"block md:hidden pl-3"}>
                     <div onClick={handleShowMenu} className={"text-2xl hover:text-primary cursor-pointer transition-colors"}>
                         <i className="fa-regular fa-bars"></i>

@@ -40,7 +40,7 @@ const de = {
             description: "Übertragen Sie Ihre Möbel mit unserem spezialisierten Versandservice vertrauensvoll in die Dominikanische Republik. Professionelle Verpackung, äußerste Sorgfalt und flexible Optionen für Ihre Bedürfnisse. Wir kümmern uns um den gesamten Logistikprozess, damit Sie einen sorgenfreien Versand genießen können. Vereinfachen Sie den Versand Ihrer Möbel mit unserem zuverlässigen und hochwertigen Service."
         },
         tank: {
-            title: "Panzer",
+            title: "Tank",
             description: "Unser Tanktransportservice gibt Ihnen die Gewissheit, dass Sie diese großen Container sicher und effizient transportieren können. Wir verfügen über die Erfahrung und die Ressourcen, die für die spezialisierte Abwicklung des Tanktransports erforderlich sind. Wir kümmern uns um die gesamte Logistik, von der Verladung bis zur Lieferung, und garantieren so die Pflege und Unversehrtheit Ihrer Tanks. Vertrauen Sie unserem zuverlässigen Service für den problemlosen Versand Ihrer Tanks."
         }
     },

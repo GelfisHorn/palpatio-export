@@ -53,7 +53,7 @@ const de = {
             categories: ["Kleidung", "Geschenke", "Spielzeug", "Werkzeuge"],
         },
         {
-            title: "Panzer",
+            title: "Tank",
             categories: ["Lagerung"],
         },
         {

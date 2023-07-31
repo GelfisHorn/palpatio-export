@@ -36,25 +36,20 @@ const getById = async (req, res) => {
 
 const create = async (req, res) => {
     const order = req.body || {};
-    const { fromCountry, items, shipping, contact } = order || {}
+    const { fromCountry, items, shipping } = order || {}
 
     // Validations
     if(!order) {
         const error = new Error('You must send an object')
         return res.status(400).json({ msg: error.message, success: false })
     }
-    if (!fromCountry || !items || !shipping || !contact) {
-        const error = new Error('"fromCountry", "items", "shipping", "contact" are required')
-        return res.status(400).json({ msg: error.message, success: false })
-    }
-    const { name, email, phoneNumber } = contact || {};
-    if(!name || !email || !phoneNumber) {
-        const error = new Error('"contact.name", "contact.email", "contact.phoneNumber" are required')
+    if (!fromCountry || !items || !shipping) {
+        const error = new Error('"fromCountry", "items", "shipping" are required')
         return res.status(400).json({ msg: error.message, success: false })
     }
 
     try {
-        const newOrder = new Order({ fromCountry, items, shipping, contact });
+        const newOrder = new Order({ fromCountry, items, shipping });
         await newOrder.save();
         return res.status(200).json({ success: true })
     } catch (err) {

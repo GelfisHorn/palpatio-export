@@ -6,16 +6,23 @@ import { useState } from 'react'
 import Link from 'next/link'
 // Animations
 import { AnimatePresence, motion } from 'framer-motion'
+// Hooks
+import useAppContext from '@/app/hooks/useAppContext'
+// Locales
+import locales from '@/app/langs/components/home/faq';
 // Styles
 import styles from './Index.module.css'
 
 export default function FAQ() {
+
+    const { lang } = useAppContext();
+
     return (
         <div className={`${styles.container} py-20 px-6 sm:px-20`}>
             <div className={"flex flex-col justify-center gap-16 h-full"}>
                 <div className={"flex flex-col gap-2 text-center"}>
-                    <div className={"uppercase font-bold sm:text-lg text-primary"}>Preguntas frequentes</div>
-                    <h2 className={"text-2xl sm:text-4xl font-bold"}>Encuentra respuestas a tus dudas</h2>
+                    <div className={"uppercase font-bold sm:text-lg text-primary"}>{locales[lang].subtitle}</div>
+                    <h2 className={"text-2xl sm:text-4xl font-bold"}>{locales[lang].title}</h2>
                 </div>
                 <div className={"grid grid-cols-1 divide-y"}>
                     <Item

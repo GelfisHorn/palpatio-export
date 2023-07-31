@@ -9,9 +9,10 @@ import Boxes from "./components/Home/Boxes/Index"
 import Process from "./components/Home/Process/Index"
 import AboutUs from "./components/Home/AboutUs/Index"
 import FAQ from "./components/Home/FAQ/Index"
+import Contact from "./components/Home/Contact/Index"
+import ReviewsSection from "./components/Home/Reviews/Index"
 // Styles
 import styles from './page.module.css'
-import Contact from "./components/Home/Contact/Index"
 
 export const metadata = {
 	title: 'Inicio | Pal Patio Export',
@@ -32,7 +33,10 @@ export default function Home() {
 				<Boxes />
 				<Process />
 			</div>
-			<AboutUs />
+			<div className={"border-b"}>
+				<AboutUs />
+				<ReviewsSection />
+			</div>
 			<div className={"divide-y"}>
 				<FAQ />
 				<Contact />

@@ -175,3 +175,24 @@ img {
         transform: scale(1.0);
     }
 }
+
+.swiper-pagination-bullet-active {
+    background: rgb(14 116 144) !important;
+}
+
+.bullet-lightmode .swiper-pagination-bullet {
+    background: #000;
+}
+
+.bullet-darkmode .swiper-pagination-bullet {
+    background: #fff;
+}
+
+.process-swiper {
+    padding: 0rem 0rem 4rem 0rem !important;
+}
+
+.reviews .swiper-wrapper {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}

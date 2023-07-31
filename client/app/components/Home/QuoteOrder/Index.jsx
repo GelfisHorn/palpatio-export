@@ -10,8 +10,14 @@ import { toast, Toaster } from 'react-hot-toast';
 // Settings
 import { PRICE, PRICE_DEFAULT, UNITS_MAX } from '@/app/config/order/order';
 import { formatMoney } from '@/app/helpers/formatMoney';
+// Hooks
+import useAppContext from '@/app/hooks/useAppContext'
+// Locales
+import locales from '@/app/langs/components/home/quoteOrder';
 
 export default function QuoteOrder() {
+
+    const { lang } = useAppContext();
     
     const [ weight, setWeight ] = useState("");
     const [ length, setLength ] = useState("");
@@ -21,7 +27,7 @@ export default function QuoteOrder() {
 
     const handleQuote = () => {
         if ([weight, length, width, height].includes("") || [weight, length, width, height].includes(0)) {
-            toast.error("Debes ingresar dimensiones y peso antes de recibir una cotización")
+            toast.error(locales[lang].notifications.error.dimensions)
             return;
         }
         const DEFAULT = PRICE_DEFAULT.package;
@@ -37,24 +43,24 @@ export default function QuoteOrder() {
         <div className={`${styles.container} p-6 sm:p-20`}>
             <div className={"flex flex-col gap-16 w-full md:w-2/3 lg:w-1/2"}>
                 <div className={"flex flex-col gap-2 text-center"}>
-                    <div className={"uppercase font-bold sm:text-lg text-primary"}>Cotizar orden</div>
-                    <h2 className={"text-2xl sm:text-4xl font-bold"}>Obtén una cotización al instante</h2>
+                    <div className={"uppercase font-bold sm:text-lg text-primary"}>{locales[lang].subtitle}</div>
+                    <h2 className={"text-2xl sm:text-4xl font-bold"}>{locales[lang].title}</h2>
                 </div>
                 <div className={"flex flex-col gap-10 items-center"}>
                     <div className={"flex flex-col gap-2 w-full"}>
                         <div className={"grid grid-cols-1 sm:grid-cols-2 gap-4"}>
-                            <Input id={"weight"} placeholder={"Peso de tu pedido"} label={"Peso"} state={{ get: weight, set: setWeight }} unit={"kg"} unitsMax={UNITS_MAX.weight} />
-                            <Input id={"length"} placeholder={"Largo de tu pedido"} label={"Largo"} state={{ get: length, set: setLength }} unit={"cm"} unitsMax={UNITS_MAX.length} />
-                            <Input id={"width"} placeholder={"Ancho de tu pedido"} label={"Ancho"} state={{ get: width, set: setWidth }} unit={"cm"} unitsMax={UNITS_MAX.width} />
-                            <Input id={"height"} placeholder={"Alto de tu pedido"} label={"Alto"} state={{ get: height, set: setHeight }} unit={"cm"} unitsMax={UNITS_MAX.height} />
+                            <Input id={"weight"} placeholder={locales[lang].inputs.weight.placeholder} label={locales[lang].inputs.weight.label} state={{ get: weight, set: setWeight }} unit={"kg"} unitsMax={UNITS_MAX.weight} />
+                            <Input id={"length"} placeholder={locales[lang].inputs.length.placeholder} label={locales[lang].inputs.length.label} state={{ get: length, set: setLength }} unit={"cm"} unitsMax={UNITS_MAX.length} />
+                            <Input id={"width"} placeholder={locales[lang].inputs.width.placeholder} label={locales[lang].inputs.width.label} state={{ get: width, set: setWidth }} unit={"cm"} unitsMax={UNITS_MAX.width} />
+                            <Input id={"height"} placeholder={locales[lang].inputs.height.placeholder} label={locales[lang].inputs.height.label} state={{ get: height, set: setHeight }} unit={"cm"} unitsMax={UNITS_MAX.height} />
                         </div>
                         {total ? (
                             <div className={"flex items-center justify-between"}>
-                                <div className={"uppercase font-semibold"}>Precio estimado:</div>
+                                <div className={"uppercase font-semibold"}>{locales[lang].estimatedPrice}:</div>
                                 <span className={"text-primary font-semibold text-xl"}>{formatMoney(total)}</span></div>
                         ) : null}
                     </div>
-                    <button onClick={handleQuote} className={"border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors w-fit py-3 px-12 rounded-md"}>Cotizar orden</button>
+                    <button onClick={handleQuote} className={"border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors w-fit py-3 px-12 rounded-md"}>{locales[lang].button}</button>
                 </div>
             </div>
             <Toaster position={"top-right"} />

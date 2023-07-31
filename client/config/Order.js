@@ -80,7 +80,7 @@ const CONTENT = {
     "package": [
         {
             "id": "small",
-            "name": "Paquete chico"
+            "name": "Paquete pequeño"
         },
         {
             "id": "medium",

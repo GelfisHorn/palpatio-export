@@ -4,16 +4,21 @@
 import { formatMoney } from "@/app/helpers/formatMoney";
 // Components
 import OrderNavbar from "../Navbar";
+import WhatsAppButton from "../../WhatsAppButton/Index";
 // Styles
 import styles from './Index.module.css'
 // Hooks
 import useAppContext from "@/app/hooks/useAppContext";
+// Config
+import { COUNTRIES } from "@/app/config/order/order";
 // Toast
 import { Toaster } from 'react-hot-toast';
-import { COUNTRIES } from "@/app/config/order/order";
-import WhatsAppButton from "../../WhatsAppButton/Index";
+// Locales
+import locales from '@/app/langs/components/order/layout';
 
 export default function OrderLayout({ children, step, showSidebar }) {
+
+    const { lang } = useAppContext();
     
     const { order } = useAppContext();
     
@@ -35,21 +40,21 @@ export default function OrderLayout({ children, step, showSidebar }) {
                     <div className={`${styles.height} w-full md:w-2/5 lg:w-1/3 border-l`}>
                         <div className={styles.sidebar}>
                             <div className={`flex flex-col p-8 ${styles.sidebarHeight} overflow-y-scroll`}>
-                                <div className={"text-2xl"}>Resumen del pedido</div>
+                                <div className={"text-2xl"}>{locales[lang].title}</div>
                                 <div className={"divide-y"}>
-                                    <Step title={"Datos iniciales"}>
-                                        <Option label={"Desde"} option={COUNTRIES[order.from] || "Sin seleccionar"} />
-                                        <Option label={"Hacia"} option={"República Dominicana"} />
+                                    <Step title={locales[lang].country.title}>
+                                        <Option label={locales[lang].country.from} option={COUNTRIES[lang][order.from] || "Sin seleccionar"} />
+                                        <Option label={locales[lang].country.to.title} option={locales[lang].country.to.country} />
                                     </Step>
-                                    <Step title={"Pedido"}>
+                                    <Step title={locales[lang].order.title}>
                                         {order?.items?.length != 0 && order?.items?.map(item => (
                                             <div key={item.id} className={"grid grid-cols-2 py-2"}>
-                                                <Option label={"Tipo"} option={`1x ${TYPE[item.type]}`} />
+                                                <Option label={locales[lang].order.type} option={`1x ${TYPE[item.type]}`} />
                                                 {/* <Option label={"Peso"} option={`${item.weight ? `${item.weight}kg` : "-"}`} /> */}
                                             </div>
                                         ))}
                                         {order?.items?.length == 0 && (
-                                            <div>Agrega elementos a tu pedido.</div>
+                                            <div>{locales[lang].order.noOrders}</div>
                                         )}
                                     </Step>
                                     {/* <div>
@@ -86,7 +91,7 @@ function Step({ children, title }) {
 
 function Option({ label, option }) {
     return (
-        <div>
+        <div className={"py-1"}>
             <div className={styles.label}>{label}</div>
             <div className={styles.option}>{option}</div>
         </div>

@@ -12,55 +12,53 @@ import useAppContext from "@/app/hooks/useAppContext";
 // Helpers
 import randomId from "../helpers/randomId";
 import { formatMoney } from "../helpers/formatMoney";
+// Locales
+import locales from '@/app/langs/order/Page';
 
 export default function OrderShipping() {
+
+    const { lang } = useAppContext();
 
     return (
         <OrderLayout step={1}>
             <div className={"w-full px-3 sm:px-8"}>
                 <div className={"flex flex-col gap-8"}>
-                    <h2 className={"text-2xl font-bold uppercase"}>¿Qué quieres enviar?</h2>
+                    <h2 className={"text-2xl font-bold uppercase"}>{locales[lang].title}</h2>
                     <div className={"grid grid-cols-1 lg:grid-cols-2 gap-4"}>
-                        <Category category={"vehicle"} classes={`${styles.carCard} aspect-video`} title={"Vehiculos"} price={{from: 200, to: 5000}}>
-                            <div>Camiones</div>
-                            <div>Automoviles</div>
-                            <div>Motores</div>
+                        <Category category={"vehicle"} classes={`${styles.carCard} aspect-video`} title={locales[lang].items[0].title} price={{from: 200, to: 5000}}>
+                            {locales[lang].items[0].categories.map((cat, index) => (
+                                <div key={index}>{cat}</div>
+                            ))}
                         </Category>
-                        <Category category={"furniture"} classes={`${styles.furnitureCard} aspect-video`} title={"Muebles"} price={{ from: 80, to: 350 }}>
-                            <div>Mesas</div>
-                            <div>Sillones</div>
-                            <div>Estanterías</div>
-                            <div>Sillas</div>
+                        <Category category={"furniture"} classes={`${styles.furnitureCard} aspect-video`} title={locales[lang].items[1].title} price={{ from: 80, to: 350 }}>
+                            {locales[lang].items[1].categories.map((cat, index) => (
+                                <div key={index}>{cat}</div>
+                            ))}
                         </Category>
-                        <Category category={"box"} classes={`${styles.boxCard} aspect-video`} title={"Cajas"} price={{ from: 60, to: 250 }}>
-                            <div>Ropa</div>
-                            <div>Regalos</div>
-                            <div>Juguetes</div>
-                            <div>Herramientas</div>
+                        <Category category={"box"} classes={`${styles.boxCard} aspect-video`} title={locales[lang].items[2].title} price={{ from: 60, to: 250 }}>
+                            {locales[lang].items[2].categories.map((cat, index) => (
+                                <div key={index}>{cat}</div>
+                            ))}
                         </Category>
-                        <Category category={"tank"} classes={`${styles.tankCard} aspect-video`} title={"Tanques"} price={{ from: 80, to: 250 }}>
-                            <div>Almacenamiento</div>
-                            <div>Combustible</div>
-                            <div>Agua</div>
-                            <div>Gas</div>
+                        <Category category={"tank"} classes={`${styles.tankCard} aspect-video`} title={locales[lang].items[3].title} price={{ from: 80, to: 250 }}>
+                            {locales[lang].items[3].categories.map((cat, index) => (
+                                <div key={index} className={"col-start-1 col-end-3"}>{cat}</div>
+                            ))}
                         </Category>
-                        <Category category={"pallet"} classes={`${styles.palletCard} aspect-video`} title={"Pallet"} price={{ from: 160, to: 300 }}>
-                            <div>Madera</div>
-                            <div>Plástico</div>
-                            <div>Metal</div>
-                            <div>Cartón</div>
+                        <Category category={"pallet"} classes={`${styles.palletCard} aspect-video`} title={locales[lang].items[4].title} price={{ from: 160, to: 300 }}>
+                            {locales[lang].items[4].categories.map((cat, index) => (
+                                <div key={index} className={"col-start-1 col-end-3"}>{cat}</div>
+                            ))}
                         </Category>
-                        <Category category={"moving"} classes={`${styles.movingCard} aspect-video border-[.35rem] border-orange-400`} title={"Mudanzas"} subtitle={"20% de descuento"}>
-                            <div>Electrodomésticos</div>
-                            <div>Muebles</div>
-                            <div>Decoración</div>
-                            <div>Ropa</div>
+                        <Category category={"moving"} classes={`${styles.movingCard} aspect-video border-[.35rem] border-orange-400`} title={locales[lang].items[5].title} subtitle={"20% de descuento"}>
+                            {locales[lang].items[5].categories.map((cat, index) => (
+                                <div key={index}>{cat}</div>
+                            ))}
                         </Category>
-                        <Category category={"other"} classes={`${styles.otherCard} lg:col-start-1 lg:col-end-3 aspect-video lg:aspect-[3/1]`} title={"Otros"}>
-                            <div>Herramientas</div>
-                            <div>Jardinería</div>
-                            <div>Artículos de viaje</div>
-                            <div>Electrónicos</div>
+                        <Category category={"other"} classes={`${styles.otherCard} lg:col-start-1 lg:col-end-3 aspect-video lg:aspect-[3/1]`} title={locales[lang].items[6].title}>
+                            {locales[lang].items[6].categories.map((cat, index) => (
+                                <div key={index}>{cat}</div>
+                            ))}
                         </Category>
                     </div>
                 </div>
@@ -70,6 +68,8 @@ export default function OrderShipping() {
 }
 
 function Category({ children, category, classes, title, subtitle, price }) {
+
+    const { lang } = useAppContext();
 
     const router = useRouter();
 
@@ -136,25 +136,18 @@ function Category({ children, category, classes, title, subtitle, price }) {
                     {subtitle && (<div className={"text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-lg italic bg-orange-400 text-white px-2 rounded-full"}>{subtitle}</div>)}
                 </div>
                 <div className={"grid grid-cols-2 gap-x-5 text-lg"}>
-                    {children || (
-                        <>
-                            <div>Ejemplo 1</div>
-                            <div>Ejemplo 2</div>
-                            <div>Ejemplo 3</div>
-                            <div>Ejemplo 4</div>
-                        </>
-                    )}     
+                    {children}     
                 </div>
                 <div className={"flex items-center gap-2 text-lg absolute -bottom-2 md:bottom-2"}>
                     {price?.from ? (
                         <>
-                            <div className={"text-neutral-100"}>Rango de precio:</div>
+                            <div className={"text-neutral-100"}>{locales[lang].priceRange}:</div>
                             <div className={"font-semibold"}>{formatMoney(price.from)}</div>
-                            <div className={"text-neutral-100"}>a</div>
+                            <div className={"text-neutral-100"}>-</div>
                             <div className={"font-semibold"}>{formatMoney(price.to)}</div>
                         </>
                     ) : (
-                        <div className={"font-semibold"}>Solicitar presupuesto</div>
+                        <div className={"font-semibold"}>{locales[lang].requestBudget}</div>
                     )}
                 </div>
             </div>

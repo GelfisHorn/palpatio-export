@@ -4,10 +4,28 @@ const AppContext = createContext();
 
 export function AppContextProvider({ children }) {
 
+    // Language
+    const [ lang, setLang ] = useState('es');
+    const handleSetLang = (newLang) => {
+        if(newLang == lang) {
+            return;
+        }
+        setLang(newLang)
+        localStorage.setItem('lang', newLang);
+    };
+
     const [ fetchingAuth, setFetchingAuth ] = useState(true);
     const [ auth, setAuth ] = useState({});
 
     useEffect(() => {
+        if(localStorage != undefined) {
+            const lang = localStorage.getItem('lang');
+            if(!lang) {
+                return;
+            }
+            setLang(lang);
+        }
+        // Get auth
         if(Object.keys(auth).length != 0) {
             return;
         }
@@ -71,14 +89,13 @@ export function AppContextProvider({ children }) {
         total: 0
     })
 
+    // Order step
     const [ step, setStep ] = useState(1);
-
     const handleNextStep = () => {
         if(step == 4) return;
 
         setStep(step + 1);
     }
-
     const handlePrevStep = () => {
         if (step == 1) return;
 
@@ -87,6 +104,8 @@ export function AppContextProvider({ children }) {
 
     return (
         <AppContext.Provider value={{
+            lang,
+            handleSetLang,
             fetchingAuth,
             auth,
             setAuth,

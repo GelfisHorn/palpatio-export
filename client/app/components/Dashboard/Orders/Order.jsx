@@ -65,7 +65,7 @@ export default function DashboardOrder({ order, setOrder, loading }) {
                     whileInView={{ opacity: 1, x: 0 }}
                 >
                     <div className={"flex flex-col gap-6 pt-6 lg:pt-8"}>
-                        <h2 className={"font-bold text-3xl mx-4 md:mx-6 lg:mx-8"}>Orden de {order.contact.name}</h2>
+                        <h2 className={"font-bold text-3xl mx-4 md:mx-6 lg:mx-8"}>Orden de {order.shipping.from.fullName}</h2>
                     </div>
                     <div className={`px-4 md:px-8 py-4 md:py-6 rounded-xl transition-all`}>
                         <div className={"flex flex-col gap-4 border-b pb-4"}>
@@ -103,15 +103,15 @@ export default function DashboardOrder({ order, setOrder, loading }) {
                                 </div>
                                 <div className={"flex items-center gap-2"}>
                                     <div className={"grid place-content-center text-primary w-6 text-lg"}><i className="fa-solid fa-user"></i></div>
-                                    <div className={"font-medium text-neutral-700 break-all"}>{order.contact.name}</div>
+                                    <div className={"font-medium text-neutral-700 break-all"}>{order.shipping.from.fullName}</div>
                                 </div>
                                 <div className={"flex items-center gap-2"}>
                                     <div className={"grid place-content-center text-primary w-6 text-lg"}><i className="fa-solid fa-envelope"></i></div>
-                                    <div className={"font-medium text-neutral-700 break-all"}>{order.contact.email}</div>
+                                    <div className={"font-medium text-neutral-700 break-all"}>{order.shipping.from.email}</div>
                                 </div>
                                 <div className={"flex items-center gap-2"}>
                                     <div className={"grid place-content-center text-primary w-6 text-lg"}><i className="fa-solid fa-phone"></i></div>
-                                    <div className={"font-medium text-neutral-700 break-all"}>{order.contact.phoneNumber}</div>
+                                    <div className={"font-medium text-neutral-700 break-all"}>{order.shipping.from.phoneNumber}</div>
                                 </div>
                             </div>
                             <div className={"flex flex-col gap-4 border-b pb-4"}>

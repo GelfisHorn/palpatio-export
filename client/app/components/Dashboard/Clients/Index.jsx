@@ -51,7 +51,10 @@ export default function DashboardClients() {
 
         try {
             const { data } = await axios.post('/api/dashboard/clients/getAll', { page, config });
-            setClients(data.users);
+            const sortedByDate = data.users.sort(function (a, b) {
+                return new Date(b.updatedAt) - new Date(a.updatedAt);
+            });
+            setClients(sortedByDate);
             setTotalPages(data.totalPages);
         } catch (error) {
             toast.error("Hubo un error al obtener los clientes");

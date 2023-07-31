@@ -85,20 +85,6 @@ const orderSchema = mongoose.Schema({
             type: String
         },
     },
-    contact: {
-        name: {
-            type: String,
-            required: true
-        },
-        email: {
-            type: String,
-            required: true
-        },
-        phoneNumber: {
-            type: String,
-            required: true
-        }
-    },
     status: {
         type: String,
         required: true,

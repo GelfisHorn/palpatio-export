@@ -77,7 +77,10 @@ export default function DashboardOrders() {
             handleSetTabsCount(data);
             // Filter orders by status
             const filtered = data.filter(order => order.status == status);
-            setFilteredOrders(filtered);
+            const sortedByDate = filtered.sort(function (a, b) {
+                return new Date(b.updatedAt) - new Date(a.updatedAt);
+            });
+            setFilteredOrders(sortedByDate);
         } catch (error) {
             toast.error("Hubo un error al obtener las ordenes");
         } finally {
@@ -87,7 +90,10 @@ export default function DashboardOrders() {
 
     function filterOrdersBy(status) {
         const filtered = orders.filter(order => order.status == status);
-        setFilteredOrders(filtered);
+        const sortedByDate = filtered.sort(function (a, b) {
+            return new Date(b.updatedAt) - new Date(a.updatedAt);
+        });
+        setFilteredOrders(sortedByDate);
     }
 
     function handleSetStatus(status) {

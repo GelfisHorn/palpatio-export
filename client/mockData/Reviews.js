@@ -1,175 +1,199 @@
 const fr = [
     {
-        "description": "Excellent service d'exportation ! Ils ont démontré une incroyable capacité à coordonner les envois depuis l'Europe vers la République dominicaine. Le processus était rapide et professionnel, et j'ai reçu mes articles en parfait état. Je les recommande vivement !",
-        "name": "Juan",
+        "description": "Merci à toute l'équipe d'avoir envoyé mon véhicule en République dominicaine. Tout le processus a été transparent et ma voiture est arrivée en parfait état.",
+        "name": "Javier López",
         "gender": "male",
-        "title": "Livraisons rapides et fiables"
+        "title": "Expéditions rapides et fiables"
     },
     {
-        "description": "Service incroyable. Le site Web est facile à utiliser et à passer des commandes. L'équipe de support client était très sympathique et m'a aidé avec toutes mes questions. Une expérience de magasinage très satisfaisante!",
-        "name": "Ana",
+        "description": "Pal Patio Export a fait un travail exceptionnel en envoyant mes meubles en République dominicaine. Je suis ravie du service d'emballage.",
+        "name": "Marta Rodríguez",
         "gender": "female",
         "title": "Achat de produits européens"
     },
     {
-        "description": "Une solution parfaite pour mon entreprise en République dominicaine ! Grâce à ce site d'exportation, je peux accéder à des articles de haute qualité depuis l'Europe pour approvisionner mon magasin. La livraison était ponctuelle et le processus d'importation sans problème. Hautement recommandé !",
-        "name": "Pedro",
+        "description": "Mon déménagement complet depuis l'Europe a été rendu possible grâce à votre équipe. La communication était excellente et tout est arrivé à temps.",
+        "name": "Carlos Martínez",
         "gender": "male",
         "title": "Approvisionnement efficace"
     },
     {
-        "description": "L'expérience de l'importation depuis l'Europe a été incroyable grâce à ce site Web. Les produits sont arrivés en excellent état, et le dédouanement a été simple. Je vais certainement continuer à utiliser leurs services pour mes futures importations.",
-        "name": "Laura",
-        "gender": "female",
-        "title": "Importation sans problème"
-    },
-    {
-        "description": "Une excellente option pour acheter des produits européens en République dominicaine ! Le site Web est intuitif, le processus d'achat est rapide, et le service client est de premier ordre. Les prix sont compétitifs, et la qualité des produits est inégalée. Très satisfait de mon expérience d'achat !",
-        "name": "Carlos",
+        "description": "Je recommande vivement leur service pour les expéditions internationales. Mon paquet est arrivé à l'heure et sans dommages. Très satisfait !",
+        "name": "Ricardo Gómez",
         "gender": "male",
-        "title": "Qualité et service exceptionnels"
+        "title": "Importation sans problèmes"
     },
     {
-        "description": "J'ai été impressionné par la rapidité et l'efficacité du service d'exportation. En quelques jours seulement, mes articles sont arrivés de l'Europe en République dominicaine en parfait état. L'équipe du site Web était sympathique et attentionnée. Félicitations pour votre excellent travail !",
-        "name": "Isabel",
+        "description": "L'équipe s'est assurée que toutes les formalités douanières étaient complétées sans problème. Mon envoi est arrivé sans retards ni coûts supplémentaires. Je suis très contente.",
+        "name": "María Sánchez",
+        "gender": "female",
+        "title": "Qualité et service remarquables"
+    },
+    {
+        "description": "Un service client incroyable. Ils ont répondu à toutes mes questions et m'ont guidé à chaque étape du processus d'expédition.",
+        "name": "Alberto Ramírez",
+        "gender": "male",
+        "title": "Une expérience exceptionnelle avec Pal Patio Export"
+    },
+    {
+        "description": "L'envoi d'articles depuis l'Europe a été beaucoup plus facile avec leur aide. Leurs tarifs compétitifs et la qualité du service m'ont impressionnée.",
+        "name": "Cristina Castro",
         "gender": "female",
         "title": "Rapidité et efficacité garanties"
     },
     {
-        "description": "Je recommande vivement ce site d'exportation. Le processus d'achat était simple, et l'équipe de support était disponible pour répondre à mes questions à tout moment. Les produits sont arrivés bien emballés et dans les délais promis. Je reviendrai certainement pour faire plus d'achats !",
-        "name": "Luis",
+        "description": "Je suis très satisfait de la manière dont mon envoi a été traité. Ils sont définitivement une entreprise de confiance pour les envois internationaux.",
+        "name": "Juan Hernández",
         "gender": "male",
-        "title": "Excellent service client"
+        "title": "Service client excellent"
     }
 ]
 const de = [
     {
-        "description": "Ausgezeichneter Exportdienst! Sie haben erstaunliche Fähigkeiten gezeigt, um Sendungen von Europa in die Dominikanische Republik zu koordinieren. Der Prozess verlief schnell und professionell, und ich erhielt meine Artikel in einwandfreiem Zustand. Ich kann sie wärmstens empfehlen!",
-        "name": "Juan",
+        "description": "Vielen Dank an das gesamte Team, dass sie mein Fahrzeug in die Dominikanische Republik geschickt haben. Der gesamte Prozess verlief transparent und mein Auto kam in perfektem Zustand an.",
+        "name": "Javier López",
         "gender": "male",
-        "title": "Schnelle und Zuverlässige Lieferungen"
+        "title": "Schnelle und zuverlässige Lieferungen"
     },
     {
-        "description": "Unglaublicher Service. Die Website ist einfach zu bedienen und einfach zu bestellen. Das Kundensupport-Team war sehr freundlich und hat mir bei allen meinen Fragen geholfen. Ein sehr zufriedenstellendes Einkaufserlebnis!",
-        "name": "Ana",
+        "description": "Pal Patio Export hat einen herausragenden Job gemacht, als sie meine Möbel in die Dominikanische Republik geschickt haben. Ich bin begeistert vom Verpackungsservice.",
+        "name": "Marta Rodríguez",
         "gender": "female",
         "title": "Kauf von europäischen Produkten"
     },
     {
-        "description": "Eine perfekte Lösung für mein Geschäft in der Dominikanischen Republik! Dank dieser Export-Website kann ich hochwertige Artikel aus Europa beziehen, um mein Geschäft zu bestücken. Die Lieferung war pünktlich, und der Importprozess war unkompliziert. Sehr empfehlenswert!",
-        "name": "Pedro",
+        "description": "Mein kompletter Umzug von Europa war dank Ihres Teams möglich. Die Kommunikation war ausgezeichnet und alles kam pünktlich an.",
+        "name": "Carlos Martínez",
         "gender": "male",
         "title": "Effiziente Beschaffung"
     },
     {
-        "description": "Die Erfahrung des Imports aus Europa war dank dieser Website erstaunlich. Die Produkte kamen in ausgezeichnetem Zustand an, und die Zollabfertigung verlief reibungslos. Ich werde ihre Dienste auf jeden Fall für meine zukünftigen Importe weiterhin nutzen.",
-        "name": "Laura",
-        "gender": "female",
-        "title": "Reibungsloser Import"
+        "description": "Ich empfehle ihren Service für internationale Sendungen wärmstens. Mein Paletten kam pünktlich und unbeschädigt an. Sehr zufrieden!",
+        "name": "Ricardo Gómez",
+        "gender": "male",
+        "title": "Problemlose Einfuhr"
     },
     {
-        "description": "Eine ausgezeichnete Option für den Kauf europäischer Produkte in der Dominikanischen Republik! Die Website ist benutzerfreundlich, der Kaufvorgang ist schnell, und der Kundenservice ist erstklassig. Die Preise sind wettbewerbsfähig, und die Produktqualität ist unübertroffen. Sehr zufrieden mit meiner Einkaufserfahrung!",
-        "name": "Carlos",
-        "gender": "male",
+        "description": "Das Team sorgte dafür, dass alle Zollpapiere problemlos ausgefüllt wurden. Meine Sendung kam ohne Verzögerungen oder zusätzliche Kosten an. Ich bin sehr glücklich.",
+        "name": "María Sánchez",
+        "gender": "female",
         "title": "Herausragende Qualität und Service"
     },
     {
-        "description": "Ich war beeindruckt von der Geschwindigkeit und Effizienz des Exportdienstes. Innerhalb weniger Tage kamen meine Artikel aus Europa in der Dominikanischen Republik in einwandfreiem Zustand an. Das Team der Website war freundlich und aufmerksam. Herzlichen Glückwunsch zu Ihrer hervorragenden Arbeit!",
-        "name": "Isabel",
-        "gender": "female",
-        "title": "Schnelligkeit und Effizienz garantiert"
+        "description": "Incredible Kundenservice. Sie beantworteten all meine Fragen und führten mich durch jeden Schritt des Versandprozesses.",
+        "name": "Alberto Ramírez",
+        "gender": "male",
+        "title": "Eine außergewöhnliche Erfahrung mit Pal Patio Export"
     },
     {
-        "description": "Ich kann diese Export-Website wärmstens empfehlen. Der Kaufprozess war unkompliziert, und das Support-Team war jederzeit verfügbar, um meine Fragen zu beantworten. Die Produkte kamen gut verpackt und innerhalb des zugesagten Zeitrahmens an. Ich werde auf jeden Fall wiederkommen, um weitere Einkäufe zu tätigen!",
-        "name": "Luis",
+        "description": "Das Versenden von Gegenständen aus Europa war mit ihrer Hilfe viel einfacher. Ihre wettbewerbsfähigen Preise und die Qualität des Service haben mich beeindruckt.",
+        "name": "Cristina Castro",
+        "gender": "female",
+        "title": "Geschwindigkeit und Effizienz garantiert"
+    },
+    {
+        "description": "Ich bin sehr zufrieden mit der Abwicklung meiner Sendung. Sie sind definitiv ein vertrauenswürdiges Unternehmen für internationale Sendungen.",
+        "name": "Juan Hernández",
         "gender": "male",
         "title": "Ausgezeichneter Kundenservice"
     }
 ]
 const en = [
     {
-        "description": "Excellent export service! They have shown amazing ability to coordinate shipments from Europe to the Dominican Republic. The process was fast and professional, and I received my items in perfect condition. I highly recommend them!",
-        "name": "Juan",
+        "description": "Thanks to the entire team for sending my vehicle to the Dominican Republic. The whole process was transparent, and my car arrived in perfect condition.",
+        "name": "Javier López",
         "gender": "male",
         "title": "Fast and Reliable Shipments"
     },
     {
-        "description": "Incredible service. The website is easy to use and place orders. The customer support team was very friendly and helped me with all my queries. A very satisfying shopping experience!",
-        "name": "Ana",
+        "description": "Pal Patio Export did an exceptional job in sending my furniture to the Dominican Republic. I am delighted with the packing service.",
+        "name": "Marta Rodríguez",
         "gender": "female",
         "title": "Purchase of European Products"
     },
     {
-        "description": "A perfect solution for my business in the Dominican Republic! Thanks to this export website, I can access high-quality items from Europe to stock my store. The delivery was on time, and the import process was hassle-free. Highly recommended!",
-        "name": "Pedro",
+        "description": "My complete move from Europe was possible thanks to your team. The communication was excellent, and everything arrived on time.",
+        "name": "Carlos Martínez",
         "gender": "male",
         "title": "Efficient Sourcing"
     },
     {
-        "description": "The experience of importing from Europe has been amazing thanks to this website. The products arrived in excellent condition, and customs clearance was straightforward. I will definitely continue using their services for my future imports.",
-        "name": "Laura",
-        "gender": "female",
-        "title": "Smooth Importation"
+        "description": "I highly recommend their service for international shipments. My pallet arrived on time and without any damages. Very satisfied!",
+        "name": "Ricardo Gómez",
+        "gender": "male",
+        "title": "Trouble-free Importation"
     },
     {
-        "description": "An excellent option for buying European products in the Dominican Republic! The website is intuitive, the purchasing process is swift, and the customer service is top-notch. The prices are competitive, and the product quality is unmatched. Very satisfied with my shopping experience!",
-        "name": "Carlos",
-        "gender": "male",
+        "description": "The team made sure all the customs paperwork was completed without any issues. My shipment arrived without delays or additional costs. I am very happy.",
+        "name": "María Sánchez",
+        "gender": "female",
         "title": "Outstanding Quality and Service"
     },
     {
-        "description": "I was impressed with the speed and efficiency of the export service. In just a few days, my items arrived from Europe to the Dominican Republic in perfect condition. The website's team was friendly and attentive throughout. Congratulations on your excellent work!",
-        "name": "Isabel",
+        "description": "Incredible customer service. They answered all my questions and guided me through each step of the shipping process.",
+        "name": "Alberto Ramírez",
+        "gender": "male",
+        "title": "An Exceptional Experience with Pal Patio Export"
+    },
+    {
+        "description": "Sending items from Europe was much easier with their help. Their competitive rates and quality of service impressed me.",
+        "name": "Cristina Castro",
         "gender": "female",
         "title": "Speed and Efficiency Guaranteed"
     },
     {
-        "description": "I highly recommend this export website. The purchasing process was straightforward, and the support team was available to answer my questions at all times. The products arrived well-packaged and within the promised timeframe. I will definitely be coming back to make more purchases!",
-        "name": "Luis",
+        "description": "I am very satisfied with how my shipment was handled. They are definitely a trustworthy company for international shipments.",
+        "name": "Juan Hernández",
         "gender": "male",
         "title": "Excellent Customer Service"
     }
 ]
 const es = [
     {
-        "description": "¡Excelente servicio de exportación! Han demostrado una asombrosa habilidad para coordinar los envíos desde Europa a República Dominicana. El proceso fue rápido y profesional, y recibí mis artículos en perfectas condiciones. ¡Los recomiendo ampliamente!",
-        "name": "Juan",
+        "description": "Gracias a todo el equipo por enviar mi vehículo a la República Dominicana. Todo el proceso fue transparente y mi auto llegó en perfectas condiciones.",
+        "name": "Javier López",
         "gender": "male",
         "title": "Envíos rápidos y confiables"
     },
     {
-        "description": "Increíble servicio. La página web es fácil de usar y realizar pedidos. El equipo de atención al cliente fue muy amable y me ayudó con todas mis consultas. ¡Una experiencia de compra muy satisfactoria!",
-        "name": "Ana",
+        "description": "Pal Patio Export hizo un trabajo excepcional al enviar mis muebles a la República Dominicana. Estoy encantada con el servicio de embalaje.",
+        "name": "Marta Rodríguez",
         "gender": "female",
         "title": "Compra de productos europeos"
     },
     {
-        "description": "¡Una solución perfecta para mi negocio en República Dominicana! Gracias a esta web de exportación, puedo acceder a artículos de alta calidad desde Europa para abastecer mi tienda. La entrega fue puntual y el proceso de importación sin complicaciones. ¡Muy recomendable!",
-        "name": "Pedro",
+        "description": "Mi mudanza completa desde Europa fue posible gracias a su equipo. La comunicación fue excelente y todo llegó a tiempo.",
+        "name": "Carlos Martínez",
         "gender": "male",
         "title": "Abastecimiento eficiente"
     },
     {
-        "description": "La experiencia de importar desde Europa ha sido increíble gracias a esta web. Los productos llegaron en excelentes condiciones y la gestión de aduanas fue sencilla. Sin duda, continuaré utilizando sus servicios para mis futuras importaciones.",
-        "name": "Laura",
-        "gender": "female",
+        "description": "Recomiendo encarecidamente su servicio para envíos internacionales. Mi palet llegó puntual y sin daños. ¡Muy satisfecho!",
+        "name": "Ricardo Gómez",
+        "gender": "male",
         "title": "Importación sin problemas"
     },
     {
-        "description": "¡Una excelente opción para comprar productos europeos en República Dominicana! La web es intuitiva, el proceso de compra es ágil y la atención al cliente es de primera. Los precios son competitivos y la calidad de los productos es inigualable. ¡Muy satisfecho con mi experiencia de compra!",
-        "name": "Carlos",
-        "gender": "male",
+        "description": "El equipo se aseguró de que todo el papeleo aduanero se completara sin problemas. Mi envío llegó sin retrasos ni costos adicionales. Estoy muy contenta.",
+        "name": "María Sánchez",
+        "gender": "female",
         "title": "Calidad y servicio destacables"
     },
     {
-        "description": "Quedé impresionado con la rapidez y eficiencia del servicio de exportación. En pocos días, mis artículos llegaron desde Europa a República Dominicana en perfecto estado. El equipo de la web fue amable y atento en todo momento. ¡Los felicito por su excelente trabajo!",
-        "name": "Isabel",
+        "description": "Increíble atención al cliente. Respondieron a todas mis preguntas y me guiaron en cada paso del proceso de envío.",
+        "name": "Alberto Ramírez",
+        "gender": "male",
+        "title": "Una experiencia excepcional con Pal Patio Export"
+    },
+    {
+        "description": "Hacer envíos desde Europa fue mucho más sencillo con su ayuda. Sus tarifas competitivas y la calidad del servicio me impresionaron.",
+        "name": "Cristina Castro",
         "gender": "female",
         "title": "Rapidez y eficiencia garantizadas"
     },
     {
-        "description": "Recomiendo altamente esta web de exportación. El proceso de compra fue sencillo, y el equipo de soporte estuvo disponible para responder a mis preguntas en todo momento. Los productos llegaron bien embalados y en el plazo prometido. ¡Definitivamente volveré a comprar!",
-        "name": "Luis",
+        "description": "Estoy muy satisfecho con la forma en que se manejó mi envío. Son definitivamente una empresa de confianza para envíos internacionales.",
+        "name": "Juan Hernández",
         "gender": "male",
         "title": "Excelente servicio al cliente"
     }
